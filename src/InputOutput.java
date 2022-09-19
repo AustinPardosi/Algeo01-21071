@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 class InputOutput {
     // Baca dari keyboard
-    void readByKeyboard (double[][] matr, int M, int N) {
-        int i,j;
+    void readByKeyboard(double[][] matr, int M, int N) {
+        int i, j;
 
         Scanner scan = new Scanner(System.in);
         for (i = 0; i < M; i++) {
@@ -17,8 +17,8 @@ class InputOutput {
     }
 
     // Print ke layar
-    void printToScreen (double[][] matr, int M, int N) {
-        int i,j;
+    void printToScreen(double[][] matr, int M, int N) {
+        int i, j;
 
         for (i = 0; i < M; i++) {
             for (j = 0; j < N; j++) {
@@ -29,9 +29,9 @@ class InputOutput {
     }
 
     // Baca dari file
-    public static float[][] readByFile(String filename) {
+    public static double[][] readByFile(String filename) {
         int[] rowCol = countRowCol("filename");
-        float[][] matrix = new float[rowCol[0]][rowCol[1]];
+        double[][] matrix = new double[rowCol[0]][rowCol[1]];
         int i = 0;
         int j = 0;
         try {
@@ -42,7 +42,7 @@ class InputOutput {
                 String[] splitStr = data.split("\\s+");
                 j = 0;
                 for (String str : splitStr) {
-                    matrix[i][j] = Float.parseFloat(str);
+                    matrix[i][j] = Double.parseDouble(str);
                     j += 1;
                 }
                 i += 1;
