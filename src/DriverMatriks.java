@@ -15,6 +15,7 @@ class DriverMatriks {
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         Gauss ge = new Gauss();
+        GaussJordan gj = new GaussJordan();
 
         // Baca matriks
         System.out.println("Baca matriks");
@@ -22,6 +23,9 @@ class DriverMatriks {
 
         // Eselon baris
         ge.gauss(A, baris, kolom);
+
+        // Eselon baris tereduksi
+        // gj.gaussJordan(A, baris, kolom);
 
         // ini ngitung determinan, GAUSA DIGANTI2 DULU Y
         /*
