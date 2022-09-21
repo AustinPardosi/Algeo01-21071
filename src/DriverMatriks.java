@@ -22,26 +22,16 @@ class DriverMatriks {
         M.readByKeyboard(A, baris, kolom);
 
         // Eselon baris
+        double determinan = ge.detGauss(A, baris, kolom);
+        System.out.println("Determinannya adalah");
+        System.out.printf("%.2f\n",determinan);
         ge.gauss(A, baris, kolom);
 
         // Eselon baris tereduksi
         // gj.gaussJordan(A, baris, kolom);
 
-        // ini ngitung determinan, GAUSA DIGANTI2 DULU Y
-        /*
-         * int kali = 1;
-         * for (int i = 0; i < baris; i++) {
-         * for (int j = 0; j < kolom; j++) {
-         * if (i == j) {
-         * kali *= A[i][j];
-         * }
-         * }
-         * }
-         */
-        // System.out.println(kali);
-
         // Cetak matriks
-        System.out.println("Cetak matriks");
+        System.out.println("Cetak matriks eselon baris");
         M.printToScreen(A, baris, kolom);
 
         sc.close();
