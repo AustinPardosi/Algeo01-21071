@@ -14,8 +14,8 @@ class DriverMatriks {
 
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
-        Gauss ge = new Gauss();
-        // GaussJordan gj = new GaussJordan();
+        // Gauss ge = new Gauss();
+        GaussJordan gj = new GaussJordan();
 
         // Baca matriks
         System.out.println("Baca matriks");
@@ -25,7 +25,7 @@ class DriverMatriks {
         // ge.gauss(A, baris, kolom);
 
         // Eselon baris tereduksi
-        // gj.gaussJordan(A, baris, kolom);
+        gj.inversGaussJordan(A, baris);
 
         // Penyelesaian determinan dengan gauss
         // System.out.println("Determinannya adalah");
@@ -34,7 +34,7 @@ class DriverMatriks {
 
         // Mencari solusi SPL dengan gauss
         System.out.println("Solusi SPL nya kak");
-        ge.SPLGauss(A, baris, kolom);
+        // ge.SPLGauss(A, baris, kolom);
 
         // Cetak matriks
         System.out.println("Cetak matriks");

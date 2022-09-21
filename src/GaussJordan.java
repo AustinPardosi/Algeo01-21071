@@ -1,4 +1,7 @@
 public class GaussJordan {
+
+    Gauss ge = new Gauss();
+
     // [ function leadingOneRow ]
     // Desc :
     // Mencari indeks baris yang mengandung leading one di kolom tersebut
@@ -40,15 +43,18 @@ public class GaussJordan {
     }
 
     // [ procedure gaussJordan ]
-    // NOTE :
-    // udah berhasil kalo masukan awalnya udah eselon baris
-    // kalo manggil fungsi gauss dulu masih aneh hasilnya
+    // Desc :
+    // ngelakuin prosedur gauss jordan sih intinya hingga terbentuk
+    // matriks eselon tereduksi
+    // Parameter input :
+    // - matr (matriksnya)
+    // - row (jumlah baris)
+    // - col (jumlah kolom)
     void gaussJordan(double[][] matr, int row, int col) {
 
-        // // KALO MAU NYOBA MANGGIL GAUSS DULU, UN-COMMENT BAGIAN INI
-        // Gauss ge = new Gauss();
-        // // manggil gauss dulu sebelum dilanjutin gauss jordan sampe eselon tereduksi
-        // ge.gauss(matr, row, col);
+        Gauss ge = new Gauss();
+        // manggil gauss dulu sebelum dilanjutin gauss jordan sampe eselon tereduksi
+        ge.gauss(matr, row, col);
 
         // looping kolom
         for (int j = 0; j < col; j++) {
@@ -77,6 +83,75 @@ public class GaussJordan {
             }
         }
     }
+
+    // [ procedure inversGaussJordan ]
+    // Desc :
+    // mencari invers dari matriks dengan cara gauss jordan
+    // matriks eselon tereduksi
+    // Parameter input :
+    // - matr (matriksnya)
+    // - row (jumlah baris yang juga adalah jumlah kolom)
+    // prekondisi : row dan col bernilai sama, jadi nilai row dapat
+    // berperan di iterasi kolom
+    void inversGaussJordan(double[][] matr, int row) {
+        double[][] aug = new double[row][2 * row]; // matriks augmented [ A | I ]
+        // copy elemen matr ke aug
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                aug[i][j] = matr[i][j];
+            }
+        }
+
+        // tambahin di sebelah kanannya dengan matriks identitas
+        // supaya jadi bentuk [ A | I ]
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                if (i != j) {
+                    aug[i][j + row] = 0; // kolomnya ditambah row supaya jadi di sebelah kanannya
+                } else {
+                    aug[i][j + row] = 1; // kolomnya ditambah row supaya jadi di sebelah kanannya
+                }
+            }
+        }
+
+        for (int i = 0; i < row; i++) {
+            // cek apakah determinan 0 (yaitu ada elemen di diagonal yang bernilai 0)
+            if (aug[i][i] == 0) {
+                System.out.println("Matriks tidak memiliki balikan");
+                break; // keluar dari loop
+            }
+
+            // ini intinya ngelakuin gauss jordan ke matriks aug nya
+            for (int j = 0; j < row; j++) {
+                if (i != j) {
+                    // ambil rasionya, yaitu elmt aug[j][i] dibagi elmt aug[i][i] atau diagonalnya
+                    double ratio = aug[j][i] / aug[i][i];
+                    // apply gauss jordan ke matriks aug nya (termasuk si matriks identitas,
+                    // makanya looping sampe 2*row)
+                    for (int k = 0; k < 2 * row; k++) {
+                        aug[j][k] -= ratio * aug[i][k]; // dikurangin kayak biasa la ya
+                    }
+                }
+            }
+        }
+
+        // bikin nilai diagonal matriks awal jadi 1 semua
+        // otomatis matriks identitasnya juga harus ikut dibagi untuk membuat
+        // nilai diagonal matriks awal jadi 1 semua
+        for (int i = 0; i < row; i++) {
+            for (int j = row; j < 2 * row; j++) {
+                aug[i][j] = aug[i][j] / aug[i][i];
+            }
+        }
+
+        // assign balik nilai invers ke matriks awal (yaitu matr)
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+            }
+        }
+    }
+
 }
 // sekali lagi, kalo ga ngerti tanya aku aja ya
 // rada bingung kalo jelasin pake ketikan gini
