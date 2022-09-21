@@ -1,5 +1,5 @@
 public class Gauss {
-    // Oke gais, jadi idenya bakal programming modular doain jadi plis plis plis keos [mulai 9.54 pm]
+    // Oke gais, jadi idenya bakal programming modular doain jadi plis plis plis keos [mulai 9.54 pm - 11.40 pm]
     // 1. Apakah semua elemen dalam 1 baris nol semua
     boolean barisNol(double[][] matr, int kolom, int i) {
         for (int j = 0; j < kolom; j += 1) {

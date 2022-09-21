@@ -14,26 +14,31 @@ class DriverMatriks {
 
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
-        // Gauss ge = new Gauss();
-        GaussJordan gj = new GaussJordan();
+        Gauss ge = new Gauss();
+        // GaussJordan gj = new GaussJordan();
+        Kofaktor k = new Kofaktor();
 
         // Baca matriks
         System.out.println("Baca matriks");
         M.readByKeyboard(A, baris, kolom);
 
+        // Penyelesaian determinan
+        System.out.println("Determinannya adalah");
+        // 1. Determinan dengan gauss
+        double det1 = ge.detGauss(A, baris, kolom);
+        System.out.printf("%.2f \n",det1);
+        // 2. Determinan dengan kofaktor
+        double det2 = k.detkofak(A, baris, kolom);
+        System.out.printf("%.2f \n",det2);
+
         // Eselon baris
-        // ge.gauss(A, baris, kolom);
+        ge.gauss(A, baris, kolom);
 
         // Eselon baris tereduksi
-        gj.inversGaussJordan(A, baris);
-
-        // Penyelesaian determinan dengan gauss
-        // System.out.println("Determinannya adalah");
-        // double det = ge.detGauss(A, baris, kolom);
-        // System.out.printf("%.2f \n",det);
-
+        // gj.inversGaussJordan(A, baris);
+        
         // Mencari solusi SPL dengan gauss
-        System.out.println("Solusi SPL nya kak");
+        // System.out.println("Solusi SPL nya kak");
         // ge.SPLGauss(A, baris, kolom);
 
         // Cetak matriks
