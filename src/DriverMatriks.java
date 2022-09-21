@@ -15,23 +15,23 @@ class DriverMatriks {
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         Gauss ge = new Gauss();
-        // GaussJordan gj = new GaussJordan();
+        GaussJordan gj = new GaussJordan();
 
         // Baca matriks
         System.out.println("Baca matriks");
         M.readByKeyboard(A, baris, kolom);
 
         // Eselon baris
-        double determinan = ge.detGauss(A, baris, kolom);
-        System.out.println("Determinannya adalah");
-        System.out.printf("%.2f\n",determinan);
-        ge.gauss(A, baris, kolom);
+        // double determinan = ge.detGauss(A, baris, kolom);
+        // System.out.println("Determinannya adalah");
+        // System.out.printf("%.2f\n", determinan);
+        // ge.gauss(A, baris, kolom);
 
         // Eselon baris tereduksi
-        // gj.gaussJordan(A, baris, kolom);
+        gj.gaussJordan(A, baris, kolom);
 
         // Cetak matriks
-        System.out.println("Cetak matriks eselon baris");
+        System.out.println("Cetak matriks");
         M.printToScreen(A, baris, kolom);
 
         sc.close();
