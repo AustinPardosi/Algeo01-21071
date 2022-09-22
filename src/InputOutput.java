@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;   
+import java.io.IOException; 
 
 class InputOutput {
     // Baca dari keyboard
@@ -83,5 +85,25 @@ class InputOutput {
         }
         return rowCol;
     }
+
+    // Read dari file
+    public static boolean writeFile(String path, double [][] matrix) {
+        try {
+          FileWriter myWriter = new FileWriter(path);
+          for(int i=0; i<matrix.length; i++) {
+            for(int j=0; j<matrix[i].length; j++) {
+                myWriter.write(Double.toString(matrix[i][j]) + " ");
+            }
+            myWriter.write("\n");
+          }
+          myWriter.write("\n");
+          myWriter.close();
+          System.out.println("Berhasil menuliskan file pada: " + path);
+          return true;
+        } catch (IOException e) {
+          System.out.println("An error occurred.");
+          return false;
+        }
+      }
 
 }
