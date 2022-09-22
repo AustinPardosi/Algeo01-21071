@@ -86,7 +86,8 @@ class InputOutput {
         return rowCol;
     }
 
-    // Read dari file
+    // Write dari file
+    // Belum di tes
     public static boolean writeFile(String path, double [][] matrix) {
         try {
           FileWriter myWriter = new FileWriter(path);
