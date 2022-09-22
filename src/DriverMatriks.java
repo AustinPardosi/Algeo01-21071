@@ -15,15 +15,15 @@ class DriverMatriks {
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         // Gauss ge = new Gauss();
-        // GaussJordan gj = new GaussJordan();
-        Kofaktor k = new Kofaktor();
+        GaussJordan gj = new GaussJordan();
+        // Kofaktor k = new Kofaktor();
 
         // Baca matriks
         System.out.println("Baca matriks");
         M.readByKeyboard(A, baris, kolom);
 
         // Penyelesaian determinan
-        System.out.println("Determinannya adalah");
+        // System.out.println("Determinannya adalah");
         // 1. Determinan dengan gauss
         // double det1 = ge.detGauss(A, baris, kolom);
         // System.out.printf("%.2f \n",det1);
@@ -36,22 +36,24 @@ class DriverMatriks {
 
         // Eselon baris tereduksi
         // gj.inversGaussJordan(A, baris);
+        System.out.println("Solusi SPL dengan metode Invers :");
+        gj.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
         // System.out.println("Solusi SPL nya kak");
         // ge.SPLGauss(A, baris, kolom);
 
         // Penyelesaian inverse
-        System.out.println("Inversnya adalah");
+        // System.out.println("Inversnya adalah");
         // 1. Inverse dengan adjoint
-        k.inverseAdjoint (A, baris, kolom);
+        // k.inverseAdjoint (A, baris, kolom);
         // 2. Inverse dengan gauss-jordan
         // [insert here]
 
         // Cetak matriks
-        System.out.println("Cetak matriks");
-        System.out.println("Bentuk eselon baris");
-        M.printToScreen(A, baris, kolom);
+        // System.out.println("Cetak matriks");
+        // System.out.println("Bentuk eselon baris");
+        // M.printToScreen(A, baris, kolom);
 
         sc.close();
     }
