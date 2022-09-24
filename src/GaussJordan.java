@@ -114,10 +114,12 @@ public class GaussJordan {
             }
         }
 
+        boolean singular = false;
         for (int i = 0; i < row; i++) {
             // cek apakah determinan 0 (yaitu ada elemen di diagonal yang bernilai 0)
             if (aug[i][i] == 0) {
                 System.out.println("Matriks tidak memiliki balikan");
+                singular = true;
                 break; // keluar dari loop
             }
 
@@ -145,9 +147,11 @@ public class GaussJordan {
         }
 
         // assign balik nilai invers ke matriks awal (yaitu matr)
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
-                matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+        if (!singular) {
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < row; j++) {
+                    matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+                }
             }
         }
     }
@@ -168,6 +172,7 @@ public class GaussJordan {
         // matriks b disimpen di variabel b
 
         double[][] invers = new double[row][row]; // inisialisasi matriks invers
+        double[][] temp = new double[row][row]; // copy an invers
         double[][] b = new double[row][1]; // inisialisasi matriks b
         double[][] hasil = new double[row][1]; // inisialisasi matriks hasil
         // copy elemen matr (yang bagian A saja) ke invers
@@ -181,26 +186,28 @@ public class GaussJordan {
             b[i][0] = matr[i][col - 1];
         }
         // diinvers buat dapet invers dari matriks A
+        temp = invers;
         inversGaussJordan(invers, row);
 
-        // perkalian matriks A^(-1) dan b (lebih jelasnya liat ppt pak Rin), intinya
-        // Ax = b -> x = A^(-1) * b (nanti bisa dapet solusi SPLnya dari perkalian ini)
-        for (int i = 0; i < row; i++) {
-            double sum = 0;
-            for (int j = 0; j < row; j++) {
-                sum += invers[i][j] * b[j][0];
+        // cek apakah matriks singular
+        // kalo iya -> ga punya balikan -> SPL ga bisa diselesaikan dengan invers
+        if (invers == temp) {
+            System.out.println("SPL tidak bisa diselesaikan dengan metode invers");
+        } else {
+            // perkalian matriks A^(-1) dan b (lebih jelasnya liat ppt pak Rin), intinya
+            // Ax = b -> x = A^(-1) * b (nanti bisa dapet solusi SPLnya dari perkalian ini)
+            for (int i = 0; i < row; i++) {
+                double sum = 0;
+                for (int j = 0; j < row; j++) {
+                    sum += invers[i][j] * b[j][0];
+                }
+                hasil[i][0] = sum;
             }
-            hasil[i][0] = sum;
-        }
 
-        // output hasil
-        for (int i = 0; i < row; i++) {
-            System.out.printf("x%d = %.2f \n", i + 1, hasil[i][0]);
+            // output hasil
+            for (int i = 0; i < row; i++) {
+                System.out.printf("x%d = %.2f \n", i + 1, hasil[i][0]);
+            }
         }
     }
-
 }
-// sekali lagi, kalo ga ngerti tanya aku aja ya
-// rada bingung kalo jelasin pake ketikan gini
-// aku jelasin kalo ketemu aja wkwkw
-// - oliv
