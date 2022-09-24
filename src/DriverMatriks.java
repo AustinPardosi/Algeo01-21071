@@ -21,7 +21,9 @@ class DriverMatriks {
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         // Gauss ge = new Gauss();
-        GaussJordan gj = new GaussJordan();
+        // GaussJordan gj = new GaussJordan();
+        SPL spl = new SPL();
+        // Invers invers = new Invers();
         // Kofaktor k = new Kofaktor();
 
         // Baca matriks
@@ -42,8 +44,9 @@ class DriverMatriks {
 
         // Eselon baris tereduksi
         // gj.inversGaussJordan(A, baris);
+        // invers.inversGaussJordan(A, baris);
         System.out.println("Solusi SPL dengan metode Invers :");
-        gj.SPLInvers(A, baris, kolom);
+        spl.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
         // System.out.println("Solusi SPL nya kak");
