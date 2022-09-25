@@ -48,7 +48,7 @@ public class Bicubic {
         // Mengalikan kedua matriks
         for (x = 0; x < m; x++) {
             for (y = 0; y < n; y ++) {
-                int total = 0;
+                double total = 0;
                 for (z = 0; z < r; z ++) {
                     total += A[x][z] * B[z][y];
                 }
