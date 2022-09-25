@@ -83,7 +83,7 @@ public class Gauss {
         }
     }
 
-    // Now we're ready for GAUSS!
+    // 9. Now we're ready for GAUSS!
     public void gauss(double[][] matr, int baris, int kolom) {
         // Hal yang jadi concern kita pada revisi kali ini adalah barisnol dan barisaneh, jadi
         // Kita pake algoritma kemaren yang dimodif dikit
@@ -111,104 +111,6 @@ public class Gauss {
                 if (matr[m][n] == -0) {
                     matr[m][n] = 0;
                 }
-            }
-        }
-    }
-
-    // Lesgo to determinan gauss
-    public double detGauss (double[][] matr, int baris, int kolom) {
-        // Kita bakal pake algo yang mirip sama gauss, cuma kita ga bikin dia leading one
-        // Sebelumnya, determinan cuma bisa diitung kalo matriks nya persegi yes
-        // Handling kasus terkecilnya
-        double det = 1; // inisiasi variabel
-        if (baris == 2) {
-            det *= ((matr[0][0] * matr[1][1]) - (matr[0][1] * matr[1][0]));
-        }
-        else {
-            int i = 0; 
-            pindahBarisNol (matr, baris, kolom); 
-            for (int k = 0; k < kolom; k += 1) {
-                titikPivot (matr, baris, kolom, i, k);
-                if (matr[i][k] != 0) {  
-                    for (int b = i + 1; b <= baris; b += 1) {
-                        if(b != baris) { 
-                            // Kalo b = baris, ini bisa error karena kalo kita inget lagi tadi, ada pindahbarisnol yang
-                            // midah barisnol kebawah kan?
-                            double pembagi = matr[b][k] / matr[i][k];  // Nentuin pembagi kedua row, sama kek gauss pada umumnya
-                            kurangi(matr, kolom, pembagi, i, b); // Makanya buat yang ini divide ditambah pengurangan
-                        }
-                        // ya divide nya dihapus supaya ga jadi leading one dan bisa diitung det nya
-                    }
-                    i += 1;  // Ganti baris
-                }
-            }
-            // Keluar dari loop, udah jadi eselon baris bukan leading one, simply tinggal kaliin diagonal
-            // utamanya
-            for (int j = 0; j < baris; j += 1) {
-                det = det * matr[j][j]; // ya kaliin aja sama diagonal utama
-            }
-        }
-
-        return det;
-    }
-
-    // SPL Gausssss
-    public void SPLGauss (double[][] matr, int baris, int kolom) {
-        // Lagi2 pake algo yang mirip gauss, cuma kita ketambahan 1 kolom lagi
-        int i = 0;
-        pindahBarisNol (matr, baris, kolom); 
-        for (int k = 0; k < kolom - 1; k += 1) {
-            titikPivot (matr, baris, kolom, i, k);
-            if (matr[i][k] != 0) {  
-                for (int b = i + 1; b <= baris; b += 1) {
-                    if(b != baris) { 
-                        // Kalo b = baris, ini bisa error karena kalo kita inget lagi tadi, ada pindahbarisnol yang
-                        // midah barisnol kebawah kan?
-                        double pembagi = matr[b][k] / matr[i][k];  // Nentuin pembagi kedua row, sama kek gauss pada umumnya
-                        kurangi(matr, kolom, pembagi, i, b); // Makanya buat yang ini divide ditambah pengurangan
-                    }
-                    bagiBaris (matr, kolom, matr[i][k], i);  // Yang ini divide aja, jadi misal nol semua, kita tau lah
-                    // kalo 0 dibagi apapun akan tetep 0
-                }
-                i += 1;  // Ganti baris
-            }
-        }
-        // Nilai -0 handler
-        for (int m = 0; m < baris; m += 1) {
-            for (int n = 0; n < kolom; n += 1) {
-                if (matr[m][n] == -0) {
-                    matr[m][n] = 0;
-                }
-            }
-        }
-
-        // Inisiasi, Nyari kolom terakhir
-        double[] nilai = new double[baris];
-        for (int m = 0; m < baris; m += 1) {
-            nilai[m] = matr[m][kolom-1];
-        }
-        // List nilai keiisi sama elemen terakhir di sebuah baris
-
-        // Nah ini yang susah, substitusi balik buat nentuin solusi
-        if (barisAneh(matr, kolom, baris-1)) { // Kalo baris terakhirnya baris aneh
-            System.out.println("SPL Tidak memiliki solusi");
-        }
-        else if (barisNol(matr, kolom, baris-1)) { // Kalo baris terakhirnya 0 semua
-            System.out.println("SPL memiliki banyak solusi");
-            // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
-        }
-        else {
-            // Inisiasi list hasil
-            double[] hasil = new double[baris];
-            for (int m = baris-1; m >= 0; m -= 1) {
-                hasil[m] = nilai[m];
-                for (int n = 1; n <= baris - m - 1; n += 1) {
-                    hasil[m] = hasil[m] - matr [m][m+n] * hasil[m+n];
-                }
-            }
-
-            for (int m = 0; m < baris; m += 1) {
-                System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
             }
         }
     }

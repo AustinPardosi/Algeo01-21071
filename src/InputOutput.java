@@ -106,5 +106,4 @@ class InputOutput {
             return false;
         }
     }
-
 }

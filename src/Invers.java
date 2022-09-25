@@ -1,4 +1,9 @@
 public class Invers {
+    // Mendatangkan fungsi eksternal [kumpulin sini]
+    Determinan d = new Determinan();
+    InputOutput M = new InputOutput();
+    Kofaktor k = new Kofaktor();
+
     // [ procedure inversGaussJordan ]
     // Desc :
     // mencari invers dari matriks dengan cara gauss jordan
@@ -68,6 +73,27 @@ public class Invers {
                     matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
                 }
             }
+        }
+    }
+
+    // 2. Inverse by adjoint
+    void inverseAdjoint (double[][] matr, int baris, int kolom) {
+        // Inisalisasi matriks adjoint dulu
+        double [][] inverse = new double[baris][kolom];
+
+        // Cek dulu, inget, kalo matriks determinannya 0, artinya gapunya invers
+        double determinan = d.detKofak(matr,baris,kolom);
+        if (determinan == 0) {
+            System.out.println("Matriks tidak memiliki invers.");
+        } else {
+            // Ya biasa bikin double loop
+            for (int i = 0; i < baris; i += 1) {
+                for (int j = 0; j < kolom; j += 1) {
+                    // Assign elemen hasil sesuai sama definisi kofaktor
+                    inverse[i][j] = (k.matriksAdjoint(matr,baris,kolom))[i][j] * 1/determinan;
+                }
+            }
+            M.printToScreen(inverse, baris, kolom);
         }
     }
 }
