@@ -45,12 +45,12 @@ class DriverMatriks {
         // Eselon baris tereduksi
         // gj.inversGaussJordan(A, baris);
         // invers.inversGaussJordan(A, baris);
-        System.out.println("Solusi SPL dengan metode Invers :");
-        spl.SPLInvers(A, baris, kolom);
+        // System.out.println("Solusi SPL dengan metode Invers :");
+        // spl.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
-        // System.out.println("Solusi SPL nya kak");
-        // ge.SPLGauss(A, baris, kolom);
+        System.out.println("Solusi SPL nya kak");
+        spl.SPLGauss(A, baris, kolom);
 
         // Penyelesaian inverse
         // System.out.println("Inversnya adalah");

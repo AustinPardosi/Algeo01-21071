@@ -1,3 +1,5 @@
+import java.lang.Math;  // Bakal pake pangkat
+
 public class Invers {
     // Mendatangkan fungsi eksternal [kumpulin sini]
     Determinan d = new Determinan();
@@ -76,6 +78,36 @@ public class Invers {
         }
     }
 
+    // 2. Matriks Kofaktor
+    double[][] matriksKofaktor (double[][] matr, int baris, int kolom) {
+        // Inisalisasi matriks hasilnya dulu
+        double [][] hasil = new double[baris][kolom];
+
+        // Ya biasa bikin double loop
+        for (int i = 0; i < baris; i += 1) {
+            for (int j = 0; j < kolom; j += 1) {
+                // Assign elemen hasil sesuai sama definisi kofaktor
+                hasil[i][j] = d.detGauss(k.hapusBarisKolom (matr, baris, kolom, i, j), baris - 1, kolom - 1) * Math.pow((-1), (i+j));
+            }
+        }
+        return hasil;
+    }
+
+    // 3. Matriks adjoint, yaitu transpose dari matriks kofaktor
+    double[][] matriksAdjoint (double[][] matr, int baris, int kolom) {
+        // Inisalisasi matriks adjoint dulu
+        double [][] adjoint = new double[baris][kolom];
+
+        // Ya biasa bikin double loop
+        for (int i = 0; i < baris; i += 1) {
+            for (int j = 0; j < kolom; j += 1) {
+                // Assign elemen hasil sesuai sama definisi kofaktor
+                adjoint[i][j] = (matriksKofaktor(matr,baris,kolom))[j][i];
+            }
+        }
+        return adjoint;
+    }
+
     // 2. Inverse by adjoint
     void inverseAdjoint (double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks adjoint dulu
@@ -90,7 +122,7 @@ public class Invers {
             for (int i = 0; i < baris; i += 1) {
                 for (int j = 0; j < kolom; j += 1) {
                     // Assign elemen hasil sesuai sama definisi kofaktor
-                    inverse[i][j] = (k.matriksAdjoint(matr,baris,kolom))[i][j] * 1/determinan;
+                    inverse[i][j] = (matriksAdjoint(matr,baris,kolom))[i][j] * 1/determinan;
                 }
             }
             M.printToScreen(inverse, baris, kolom);

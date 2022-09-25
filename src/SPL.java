@@ -67,7 +67,7 @@ public class SPL {
     }
 
     // 2. SPL Gauss
-    public void SPLGauss (double[][] matr, int baris, int kolom) {
+    public double[] SPLGauss (double[][] matr, int baris, int kolom) {
         // Lagi2 pake algo yang mirip gauss, cuma kita ketambahan 1 kolom lagi
         int i = 0;
         ge.pindahBarisNol (matr, baris, kolom); 
@@ -104,16 +104,43 @@ public class SPL {
         // List nilai keiisi sama elemen terakhir di sebuah baris
 
         // Nah ini yang susah, substitusi balik buat nentuin solusi
+        double[] hasil = new double[baris]; // Inisiasi list hasil
         if (ge.barisAneh(matr, kolom, baris-1)) { // Kalo baris terakhirnya baris aneh
             System.out.println("SPL Tidak memiliki solusi");
         }
         else if (ge.barisNol(matr, kolom, baris-1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
             // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
+            /* Belom jadi, skip aj
+            // Kamus Lokal
+            boolean[] stat = new boolean[baris + 1];
+            String[] ans = new String[baris + 1];
+            // Algoritma
+
+            for (int k = 0; k < baris; k++) {
+                stat[k] = false;
+            }
+
+            int count = 0;
+            for (char cha = 'a'; cha <= 'z'; cha++) {
+                if (count < baris) {
+                    ans[count] = Character.toString(cha);
+                    count += 1;
+                }
+            }
+
+            // Proses looping dimulai dari baris paling bawah
+            int ketemu = 0;
+            for (int r = baris; r >= 0; r -= 1) {
+                for (int j = 0; j < kolom - 1; j += 1) {
+                    if (matr[r][j] == 0 && matr[r][j+1] != 0) {
+                        ketemu = j;  // Kalo gaada brarti dia normal
+                    }
+                }
+            }
+            */
         }
         else {
-            // Inisiasi list hasil
-            double[] hasil = new double[baris];
             for (int m = baris-1; m >= 0; m -= 1) {
                 hasil[m] = nilai[m];
                 for (int n = 1; n <= baris - m - 1; n += 1) {
@@ -125,5 +152,6 @@ public class SPL {
                 System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
             }
         }
+        return hasil;
     }
 }
