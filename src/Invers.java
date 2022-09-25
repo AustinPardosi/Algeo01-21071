@@ -1,4 +1,4 @@
-import java.lang.Math;  // Bakal pake pangkat
+import java.lang.Math; // Bakal pake pangkat
 
 public class Invers {
     // Mendatangkan fungsi eksternal [kumpulin sini]
@@ -15,7 +15,7 @@ public class Invers {
     // - row (jumlah baris yang juga adalah jumlah kolom)
     // prekondisi : row dan col bernilai sama, jadi nilai row dapat
     // berperan di iterasi kolom
-    void inversGaussJordan(double[][] matr, int row) {
+    double[][] inversGaussJordan(double[][] matr, int row) {
         double[][] aug = new double[row][2 * row]; // inisialisasi matriks augmented [ A | I ]
         // copy elemen matr ke aug
         for (int i = 0; i < row; i++) {
@@ -76,45 +76,47 @@ public class Invers {
                 }
             }
         }
+        return matr;
     }
 
     // 2. Matriks Kofaktor
-    double[][] matriksKofaktor (double[][] matr, int baris, int kolom) {
+    double[][] matriksKofaktor(double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks hasilnya dulu
-        double [][] hasil = new double[baris][kolom];
+        double[][] hasil = new double[baris][kolom];
 
         // Ya biasa bikin double loop
         for (int i = 0; i < baris; i += 1) {
             for (int j = 0; j < kolom; j += 1) {
                 // Assign elemen hasil sesuai sama definisi kofaktor
-                hasil[i][j] = d.detGauss(k.hapusBarisKolom (matr, baris, kolom, i, j), baris - 1, kolom - 1) * Math.pow((-1), (i+j));
+                hasil[i][j] = d.detGauss(k.hapusBarisKolom(matr, baris, kolom, i, j), baris - 1, kolom - 1)
+                        * Math.pow((-1), (i + j));
             }
         }
         return hasil;
     }
 
     // 3. Matriks adjoint, yaitu transpose dari matriks kofaktor
-    double[][] matriksAdjoint (double[][] matr, int baris, int kolom) {
+    double[][] matriksAdjoint(double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks adjoint dulu
-        double [][] adjoint = new double[baris][kolom];
+        double[][] adjoint = new double[baris][kolom];
 
         // Ya biasa bikin double loop
         for (int i = 0; i < baris; i += 1) {
             for (int j = 0; j < kolom; j += 1) {
                 // Assign elemen hasil sesuai sama definisi kofaktor
-                adjoint[i][j] = (matriksKofaktor(matr,baris,kolom))[j][i];
+                adjoint[i][j] = (matriksKofaktor(matr, baris, kolom))[j][i];
             }
         }
         return adjoint;
     }
 
     // 2. Inverse by adjoint
-    void inverseAdjoint (double[][] matr, int baris, int kolom) {
+    void inverseAdjoint(double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks adjoint dulu
-        double [][] inverse = new double[baris][kolom];
+        double[][] inverse = new double[baris][kolom];
 
         // Cek dulu, inget, kalo matriks determinannya 0, artinya gapunya invers
-        double determinan = d.detKofak(matr,baris,kolom);
+        double determinan = d.detKofak(matr, baris, kolom);
         if (determinan == 0) {
             System.out.println("Matriks tidak memiliki invers.");
         } else {
@@ -122,7 +124,7 @@ public class Invers {
             for (int i = 0; i < baris; i += 1) {
                 for (int j = 0; j < kolom; j += 1) {
                     // Assign elemen hasil sesuai sama definisi kofaktor
-                    inverse[i][j] = (matriksAdjoint(matr,baris,kolom))[i][j] * 1/determinan;
+                    inverse[i][j] = (matriksAdjoint(matr, baris, kolom))[i][j] * 1 / determinan;
                 }
             }
             M.printToScreen(inverse, baris, kolom);
