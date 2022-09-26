@@ -28,19 +28,35 @@ public class Polinom {
             aug[i][n] = points[i][1];
         }
 
-        InputOutput IO = new InputOutput();
-        IO.printToScreen(aug, n, n + 1);
+        double calculate = 0;
 
         // Penyelesaian dengan metode eliminasi Gauss
         SPL spl = new SPL();
-        spl.SPLGauss(aug, n, n + 1);
+        double[] hasil = spl.SPLGauss(aug, n, n + 1);
+        System.out.print("f(x) = ");
+        for (int i = hasil.length - 1; i > -1; i--) {
+            System.out.printf("%.03f", hasil[i]);
+            if (i != 0) {
+                if (i == 1) {
+                    System.out.print("x");
+                } else {
+                    System.out.printf("x^%d", i);
+                }
+                System.out.print(" + ");
+            }
+            calculate += Math.round(hasil[i] * 1000.0) / 1000.0 * Math.pow(x, i);
+        }
+
+        System.out.println();
+        System.out.printf("f(%d) = ", x);
+        System.out.printf("%.03f\n", calculate);
+
     }
 
-    public static void main(String[] args) {
-        double[][] matrix = {{8.0, 2.0794}, {9.0, 2.1972}, {9.5, 2.251}};
+    // TESTING POLINOM
+    // public static void main(String[] args) {
+    // double[][] matrix = { { 8.0, 2.0794 }, { 9.0, 2.1972 }, { 9.5, 2.251 } };
 
-        polinom(3, matrix, 9);
-        String s = "x²";
-        System.out.println(s);
-    }
+    // polinom(3, matrix, 5);
+    // }
 }
