@@ -78,7 +78,12 @@ public class GaussJordan {
                         // tinggal dikurangin aja
                         // elemen matr[i][k] dengan pengali * matr[leadingOneRow][k]
                         matr[i][k] -= pengali * matr[leadingOneRow][k];
+                        if (matr[i][k] == -0) {
+                            matr[i][k] = 0;
+                        }
                     }
+                } else if (matr[i][j] == -0) {
+                    matr[i][j] = 0;
                 }
             }
         }
@@ -148,6 +153,9 @@ public class GaussJordan {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < row; j++) {
                 matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+                if (matr[i][j] == -0) {
+                    matr[i][j] = 0;
+                }
             }
         }
     }
