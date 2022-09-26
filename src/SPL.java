@@ -69,24 +69,26 @@ public class SPL {
     }
 
     // 2. SPL Gauss
-    public double[] SPLGauss (double[][] matr, int baris, int kolom) {
+    public double[] SPLGauss(double[][] matr, int baris, int kolom) {
         // Lagi2 pake algo yang mirip gauss, cuma kita ketambahan 1 kolom lagi
         int i = 0;
-        ge.pindahBarisNol (matr, baris, kolom); 
+        ge.pindahBarisNol(matr, baris, kolom);
         for (int k = 0; k < kolom - 1; k += 1) {
-            ge.titikPivot (matr, baris, kolom, i, k);
-            if (matr[i][k] != 0) {  
+            ge.titikPivot(matr, baris, kolom, i, k);
+            if (matr[i][k] != 0) {
                 for (int b = i + 1; b <= baris; b += 1) {
-                    if(b != baris) { 
-                        // Kalo b = baris, ini bisa error karena kalo kita inget lagi tadi, ada pindahbarisnol yang
+                    if (b != baris) {
+                        // Kalo b = baris, ini bisa error karena kalo kita inget lagi tadi, ada
+                        // pindahbarisnol yang
                         // midah barisnol kebawah kan?
-                        double pembagi = matr[b][k] / matr[i][k];  // Nentuin pembagi kedua row, sama kek gauss pada umumnya
+                        double pembagi = matr[b][k] / matr[i][k]; // Nentuin pembagi kedua row, sama kek gauss pada
+                                                                  // umumnya
                         ge.kurangi(matr, kolom, pembagi, i, b); // Makanya buat yang ini divide ditambah pengurangan
                     }
-                    ge.bagiBaris (matr, kolom, matr[i][k], i);  // Yang ini divide aja, jadi misal nol semua, kita tau lah
+                    ge.bagiBaris(matr, kolom, matr[i][k], i); // Yang ini divide aja, jadi misal nol semua, kita tau lah
                     // kalo 0 dibagi apapun akan tetep 0
                 }
-                i += 1;  // Ganti baris
+                i += 1; // Ganti baris
             }
         }
         // Nilai -0 handler
@@ -101,95 +103,94 @@ public class SPL {
         // Inisiasi, Nyari kolom terakhir
         double[] nilai = new double[baris];
         for (int m = 0; m < baris; m += 1) {
-            nilai[m] = matr[m][kolom-1];
+            nilai[m] = matr[m][kolom - 1];
         }
         // List nilai keiisi sama elemen terakhir di sebuah baris
 
         // Nah ini yang susah, substitusi balik buat nentuin solusi
         double[] hasil = new double[baris]; // Inisiasi list hasil
-        if (ge.barisAneh(matr, kolom, baris-1)) { // Kalo baris terakhirnya baris aneh
+        if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
             System.out.println("SPL Tidak memiliki solusi");
-        }
-        else if (ge.barisNol(matr, kolom, baris-1)) { // Kalo baris terakhirnya 0 semua
+        } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
             // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
-            /* Belom jadi, skip aj
-            // Kamus Lokal
-            boolean[] stat = new boolean[baris + 1];
-            String[] ans = new String[baris + 1];
-            // Algoritma
-
-            for (int k = 0; k < baris; k++) {
-                stat[k] = false;
-            }
-
-            int count = 0;
-            for (char cha = 'a'; cha <= 'z'; cha++) {
-                if (count < baris) {
-                    ans[count] = Character.toString(cha);
-                    count += 1;
-                }
-            }
-
-            // Proses looping dimulai dari baris paling bawah
-            int ketemu = 0;
-            for (int r = baris; r >= 0; r -= 1) {
-                for (int j = 0; j < kolom - 1; j += 1) {
-                    if (matr[r][j] == 0 && matr[r][j+1] != 0) {
-                        ketemu = j;  // Kalo gaada brarti dia normal
-                    }
-                }
-            }
-            */
-        }
-        else {
-            for (int m = baris-1; m >= 0; m -= 1) {
+            /*
+             * Belom jadi, skip aj
+             * // Kamus Lokal
+             * boolean[] stat = new boolean[baris + 1];
+             * String[] ans = new String[baris + 1];
+             * // Algoritma
+             * 
+             * for (int k = 0; k < baris; k++) {
+             * stat[k] = false;
+             * }
+             * 
+             * int count = 0;
+             * for (char cha = 'a'; cha <= 'z'; cha++) {
+             * if (count < baris) {
+             * ans[count] = Character.toString(cha);
+             * count += 1;
+             * }
+             * }
+             * 
+             * // Proses looping dimulai dari baris paling bawah
+             * int ketemu = 0;
+             * for (int r = baris; r >= 0; r -= 1) {
+             * for (int j = 0; j < kolom - 1; j += 1) {
+             * if (matr[r][j] == 0 && matr[r][j+1] != 0) {
+             * ketemu = j; // Kalo gaada brarti dia normal
+             * }
+             * }
+             * }
+             */
+        } else {
+            for (int m = baris - 1; m >= 0; m -= 1) {
                 hasil[m] = nilai[m];
                 for (int n = 1; n <= baris - m - 1; n += 1) {
-                    hasil[m] = hasil[m] - matr [m][m+n] * hasil[m+n];
+                    hasil[m] = hasil[m] - matr[m][m + n] * hasil[m + n];
                 }
             }
 
             for (int m = 0; m < baris; m += 1) {
-                System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
+                System.out.printf("x%d = %.2f \n", m + 1, hasil[m]);
             }
         }
         return hasil;
     }
 
     // 3. SPL Gauss Jordan
-    public double[] SPLGaussJordan (double[][] matr, int baris, int kolom){
+    public double[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
         gj.gaussJordan(matr, baris, kolom);
 
         double[] nilai = new double[baris];
         for (int m = 0; m < baris; m += 1) {
-            nilai[m] = matr[m][kolom-1];
+            nilai[m] = matr[m][kolom - 1];
         }
 
         double[] hasil = new double[baris];
-        if (baris > kolom-1) {
+        if (baris > kolom - 1) {
             System.out.println("SPL Tidak memiliki solusi");
-        } else if (baris < (kolom-1)) {
+        } else if (baris < (kolom - 1)) {
             System.out.println("SPL memiliki banyak solusi");
-        } else if (baris == (kolom-1)) {
+        } else if (baris == (kolom - 1)) {
             for (int m = 0; m < baris; m++) {
                 hasil[m] = nilai[m];
             }
-            for(int i=0; i<baris; i++) {
-                System.out.printf("x%d = %.2f \n", i+1, hasil[i]);
+            for (int i = 0; i < baris; i++) {
+                System.out.printf("x%d = %.2f \n", i + 1, hasil[i]);
             }
         }
         return hasil;
     }
 
     // 4. SPL Cramer
-    public static double[] SPLCramer(double[][] matr, int baris, int kolom) {
+    public double[] SPLCramer(double[][] matr, int baris, int kolom) {
         // idenya buat Ax = b; dimana A = cramer, B= jawaban
         double[][] cramer = new double[baris][baris];
         double[][] jawaban = new double[baris][1];
         double[] hasil = new double[baris];
 
-        // copy elemen matr (yang bagian A saja) ke cramer 
+        // copy elemen matr (yang bagian A saja) ke cramer
         for (int i = 0; i < baris; i++) {
             for (int j = 0; j < baris; j++) {
                 cramer[i][j] = matr[i][j];
@@ -197,16 +198,17 @@ public class SPL {
         }
 
         // copy elemen matr (kolom terakhir) ke jawaban
-        for (int i=0; i<baris; i++) {
-            jawaban[i][0] = matr[i][kolom-1];
+        for (int i = 0; i < baris; i++) {
+            jawaban[i][0] = matr[i][kolom - 1];
         }
 
-        // membuat matriks test untuk setiap kolom dan menghitung nilai masing2 variabel x
-        for (int k=0; k<baris; k++) {
-            double[][] test = new double[baris][kolom-1];
-            for (int i=0; i<baris; i++) {
-                for (int j=0; j<baris; j++) {
-                    if (k==j) {
+        // membuat matriks test untuk setiap kolom dan menghitung nilai masing2 variabel
+        // x
+        for (int k = 0; k < baris; k++) {
+            double[][] test = new double[baris][kolom - 1];
+            for (int i = 0; i < baris; i++) {
+                for (int j = 0; j < baris; j++) {
+                    if (k == j) {
                         test[i][j] = jawaban[i][0];
                     } else {
                         test[i][j] = cramer[i][j];
@@ -215,12 +217,12 @@ public class SPL {
             }
             // cari nilai x
             // hitung nilai x pada masing2 matriks test
-            double x = det.detKofak (test, baris, kolom-1) / det.detKofak (cramer, baris, kolom-1);
+            double x = det.detKofak(test, baris, kolom - 1) / det.detKofak(cramer, baris, kolom - 1);
             hasil[k] = x;
             if (hasil[k] == -0) {
                 hasil[k] = 0;
             }
-            System.out.printf("x%d = %.2f \n", k+1, hasil[k]);
+            System.out.printf("x%d = %.2f \n", k + 1, hasil[k]);
 
         }
         return hasil;
