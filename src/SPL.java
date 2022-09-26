@@ -2,6 +2,7 @@ public class SPL {
     // Mendatangkan fungsi eksternal [kumpulin sini]
     Gauss ge = new Gauss();
     Invers inv = new Invers();
+    static Determinan det = new Determinan();
 
     // [ procedure SPLInvers ]
     // Desc :
@@ -151,6 +152,83 @@ public class SPL {
             for (int m = 0; m < baris; m += 1) {
                 System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
             }
+        }
+        return hasil;
+    }
+
+    //c3. SPL Gauss Jordan
+    public double[] SPLGaussJordan (double[][] matr, int baris, int kolom){
+        // Mengembalikan array of string berisi hasil kalkulasi SPL dengan metode Gauss Jordan
+
+        // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
+            double[][] hasilGaussJordan =  new double[baris][baris]; // inisialisasi matriks hasil
+            try {
+                kolom = hasilGaussJordan[0].length;
+            } catch (ArrayIndexOutOfBoundsException err) {
+                kolom = 0;
+            }
+            if (baris == (kolom - 1)) {
+                // CASE 1 : baris == kolom -1
+                return solveSPLCase1(hasilGaussJordan, baris, kolom);
+            } else if (baris < (kolom - 1)) {
+                // CASE 2 : baris < kolom - 1
+                System.out.println("SPL memiliki banyak solusi");
+            } else {
+                // CASE 3 : baris > kolom - 1
+                System.out.println("SPL Tidak memiliki solusi");
+            }
+        return null;
+    }
+
+    public static double[] solveSPLCase1(double[][] matr, int baris, int kolom) {
+        double[] hasil = new double[baris];
+        for (int m = 0; m < baris; m += 1) {
+            System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
+        }
+
+        return hasil;
+    }
+
+    // 4. SPL Cramer
+    public static double[] SPLCramer(double[][] matr, int baris, int kolom) {
+        // idenya buat Ax = b; dimana A = cramer, B= jawaban
+        double[][] cramer = new double[baris][baris];
+        double[][] jawaban = new double[baris][1];
+        double[] hasil = new double[baris];
+
+        // copy elemen matr (yang bagian A saja) ke cramer 
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < baris; j++) {
+                cramer[i][j] = matr[i][j];
+            }
+        }
+
+        // copy elemen matr (kolom terakhir) ke jawaban
+        for (int i=0; i<baris; i++) {
+            jawaban[i][0] = matr[i][kolom-1];
+        }
+
+        // membuat matriks test untuk setiap kolom dan menghitung nilai masing2 variabel x
+        for (int k=0; k<baris; k++) {
+            double[][] test = new double[baris][kolom-1];
+            for (int i=0; i<baris; i++) {
+                for (int j=0; j<baris; j++) {
+                    if (k==j) {
+                        test[i][j] = jawaban[i][0];
+                    } else {
+                        test[i][j] = cramer[i][j];
+                    }
+                }
+            }
+            // cari nilai x
+            // hitung nilai x pada masing2 matriks test
+            double x = det.detKofak (test, baris, kolom-1) / det.detKofak (cramer, baris, kolom-1);
+            hasil[k] = x;
+            if (hasil[k] == -0) {
+                hasil[k] = 0;
+            }
+            System.out.printf("x%d = %.2f \n", k+1, hasil[k]);
+
         }
         return hasil;
     }
