@@ -2,6 +2,7 @@ public class SPL {
     // Mendatangkan fungsi eksternal [kumpulin sini]
     Gauss ge = new Gauss();
     Invers inv = new Invers();
+    GaussJordan gj = new GaussJordan();
     static Determinan det = new Determinan();
 
     // [ procedure SPLInvers ]
@@ -156,36 +157,28 @@ public class SPL {
         return hasil;
     }
 
-    //c3. SPL Gauss Jordan
+    // 3. SPL Gauss Jordan
     public double[] SPLGaussJordan (double[][] matr, int baris, int kolom){
-        // Mengembalikan array of string berisi hasil kalkulasi SPL dengan metode Gauss Jordan
+        gj.gaussJordan(matr, baris, kolom);
 
-        // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
-            double[][] hasilGaussJordan =  new double[baris][baris]; // inisialisasi matriks hasil
-            try {
-                kolom = hasilGaussJordan[0].length;
-            } catch (ArrayIndexOutOfBoundsException err) {
-                kolom = 0;
-            }
-            if (baris == (kolom - 1)) {
-                // CASE 1 : baris == kolom -1
-                return solveSPLCase1(hasilGaussJordan, baris, kolom);
-            } else if (baris < (kolom - 1)) {
-                // CASE 2 : baris < kolom - 1
-                System.out.println("SPL memiliki banyak solusi");
-            } else {
-                // CASE 3 : baris > kolom - 1
-                System.out.println("SPL Tidak memiliki solusi");
-            }
-        return null;
-    }
-
-    public static double[] solveSPLCase1(double[][] matr, int baris, int kolom) {
-        double[] hasil = new double[baris];
+        double[] nilai = new double[baris];
         for (int m = 0; m < baris; m += 1) {
-            System.out.printf("x%d = %.2f \n", m+1, hasil[m]);
+            nilai[m] = matr[m][kolom-1];
         }
 
+        double[] hasil = new double[baris];
+        if (baris > kolom-1) {
+            System.out.println("SPL Tidak memiliki solusi");
+        } else if (baris < (kolom-1)) {
+            System.out.println("SPL memiliki banyak solusi");
+        } else if (baris == (kolom-1)) {
+            for (int m = 0; m < baris; m++) {
+                hasil[m] = nilai[m];
+            }
+            for(int i=0; i<baris; i++) {
+                System.out.printf("x%d = %.2f \n", i+1, hasil[i]);
+            }
+        }
         return hasil;
     }
 

@@ -51,7 +51,8 @@ class DriverMatriks {
         // Mencari solusi SPL dengan gauss
         System.out.println("Solusi SPL nya kak");
         // spl.SPLGauss(A, baris, kolom);
-        SPL.SPLCramer(A, baris, kolom);
+        // SPL.SPLCramer(A, baris, kolom);
+        spl.SPLGaussJordan(A, baris, kolom);
 
         // Penyelesaian inverse
         // System.out.println("Inversnya adalah");
