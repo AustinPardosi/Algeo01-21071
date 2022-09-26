@@ -15,7 +15,7 @@
 // 𝑓(𝑥)= -0.0064𝑥^2 + 0.2266x + 0.6762 , 𝑓(5) = … 
 
 public class Polinom {
-    static void polinom(int n, double[][] points, int x) {
+    void polinom(int n, double[][] points, int x) {
         double[][] aug = new double[n][n + 1];
 
         for (int i = 0; i < n; i++) {

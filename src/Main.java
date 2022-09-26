@@ -127,7 +127,23 @@ public class Main {
         } else if (menu == 4) {
             // polinom
             if (input == 1) {
+                // Baca Input
+                System.out.println("Masukkan nilai n");
+                int n = sc.nextInt();
+                System.out.println("Masukkan jumlah titik");
+                int totalPoint = sc.nextInt();
+                System.out.println("Baca titik");
+                double[][] points = new double[totalPoint][2];
 
+                for (int i = 0; i < totalPoint; i++) {
+                    for (int j = 0; j < 2; j++) {
+                        points[i][j] = sc.nextDouble();
+                    }
+                }
+                // IO.readByKeyboard(points, totalPoint, 2);
+                System.out.println("Masukkan nilai x yang ingin ditafsir");
+                int x = sc.nextInt();
+                polinom.polinom(n, points, x);
             }
         } else if (menu == 5) {
             // bicubic
