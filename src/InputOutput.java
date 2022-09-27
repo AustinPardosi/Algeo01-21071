@@ -31,13 +31,13 @@ class InputOutput {
     }
 
     // Baca dari file
-    double[][] readByFile(String filename) {
-        int[] rowCol = countRowCol(filename);
+    double[][] readByFile(String path) {
+        int[] rowCol = countRowCol(path);
         double[][] matrix = new double[rowCol[0]][rowCol[1]];
         int i = 0;
         int j = 0;
         try {
-            File myObj = new File("test/" + filename + ".txt");
+            File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -49,6 +49,8 @@ class InputOutput {
                 }
                 i += 1;
             }
+
+            System.out.println("Berhasil membaca file pada: " + path);
             myReader.close();
 
         } catch (FileNotFoundException e) {
@@ -59,13 +61,13 @@ class InputOutput {
     }
 
     // Hitung row dan col dari file
-    int[] countRowCol(String filename) {
+    int[] countRowCol(String path) {
         // mereturn array berisi [row, col];
         int[] rowCol = new int[2];
         try {
             int i = 0;
             int j = 0;
-            File myObj = new File("test/" + filename + ".txt");
+            File myObj = new File(path);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
