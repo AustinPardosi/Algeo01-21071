@@ -160,37 +160,66 @@ public class SPL {
     }
 
     // 3. SPL Gauss Jordan
-    public double[] SPLGaussJordan (double[][] matr, int baris, int kolom) {
-    // Mengembalikan array of string berisi hasil kalkulasi SPL dengan metode Gauss Jordan 
-        gj.gaussJordan(matr, baris, kolom);
-        // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
-            double[] Hasil = new double[baris];
-            if (gj.isNoSolution(matr, baris, baris)) {
-                System.out.println("SPL Tidak memiliki solusi");
-            } else {
-                double[][] afterCut = gj.createMatEff(matr);
-                baris = afterCut.length;
-                try {
-                    kolom = afterCut[0].length;
-                } catch (ArrayIndexOutOfBoundsException err) {
-                    kolom = 0;
-                }
-                io.printToScreen(afterCut, baris, kolom);
-                if (baris == (kolom - 1)) {
-                    // CASE 1 : baris == kolom -1
-                    return cariHasil(afterCut);
-                } else if (baris < (kolom - 1)) {
-                    // CASE 2 : baris < kolom - 1
-                    System.out.println("SPL memiliki banyak solusi");
-                } else {
-                    // CASE 3 : baris > kolom - 1
-                    System.out.println("SPL Tidak memiliki solusi");
-                }
+    public double[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
+
+        double[][] m = new double[baris + 1][kolom];
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                m[i][j] = matr[i][j];
             }
-            return Hasil;
+        }
+        for (int j = 0; j < kolom; j++) {
+            m[baris][j] = 0;
+        }
+
+        // Mengembalikan array of string berisi hasil kalkulasi SPL dengan metode Gauss
+        // Jordan
+        gj.gaussJordan(m, baris + 1, kolom);
+
+        for (int i = 0; i < baris; i++) {
+            if (!ge.barisNol(m, kolom, i)) {
+                for (int j = 0; j < kolom; j++) {
+                    matr[i][j] = m[i][j];
+                }
+            } else {
+                baris = i;
+                break;
+            }
+        }
+
+        // TESTING
+        System.out.println("testing matriks setelah gauss jordan");
+        io.printToScreen(matr, baris, kolom);
+        System.out.println();
+
+        // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
+        double[] Hasil = new double[baris];
+        if (gj.isNoSolution(matr, baris, baris)) {
+            System.out.println("SPL Tidak memiliki solusi");
+        } else {
+            double[][] afterCut = gj.createMatEff(matr);
+            baris = afterCut.length;
+            try {
+                kolom = afterCut[0].length;
+            } catch (ArrayIndexOutOfBoundsException err) {
+                kolom = 0;
+            }
+            io.printToScreen(afterCut, baris, kolom);
+            if (baris == (kolom - 1)) {
+                // CASE 1 : baris == kolom -1
+                return cariHasil(afterCut);
+            } else if (baris < (kolom - 1)) {
+                // CASE 2 : baris < kolom - 1
+                System.out.println("SPL memiliki banyak solusi");
+            } else {
+                // CASE 3 : baris > kolom - 1
+                System.out.println("SPL Tidak memiliki solusi");
+            }
+        }
+        return Hasil;
     }
 
-    public double[] cariHasil (double[][] matr) {
+    public double[] cariHasil(double[][] matr) {
         int rows = matr.length;
         int cols = matr[0].length;
         double[] hasil = new double[rows];
@@ -200,7 +229,7 @@ public class SPL {
         }
 
         return hasil;
-    }  
+    }
 
     // 4. SPL Cramer
     public double[] SPLCramer(double[][] matr, int baris, int kolom) {
