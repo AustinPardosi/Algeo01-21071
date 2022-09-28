@@ -16,7 +16,7 @@ class DriverMatriks {
         int kolom = sc.nextInt();
 
         // Define matriks
-        // Bikin sesuai ide, perbesar sampe bisa selesain x
+        // Bikin sesuai ide, perbesar sampe bisa selesain x 
         int selisih = kolom - (baris + 1);
         double[][] A = new double[baris + selisih][kolom];
 
@@ -25,8 +25,8 @@ class DriverMatriks {
         // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         // Gauss ge = new Gauss();
-        GaussJordan gj = new GaussJordan();
-        SPL spl = new SPL();
+        // GaussJordan gj = new GaussJordan();
+        // SPL spl = new SPL();
         // Invers invers = new Invers();
         // Kofaktor k = new Kofaktor();
 
@@ -44,8 +44,8 @@ class DriverMatriks {
             baris += selisih;
         }
 
-        // System.out.println("Cetak matriks");
-        // M.printToScreen(A, baris, kolom);
+        System.out.println("Cetak matriks");
+        M.printToScreen(A, baris, kolom);
 
         // Penyelesaian determinan
         // System.out.println("Determinannya adalah");
@@ -60,13 +60,13 @@ class DriverMatriks {
         // ge.gauss(A, baris, kolom);
 
         // Eselon baris tereduksi
-        // gj.gaussJordan(A, baris, kolom);
+        // gj.inversGaussJordan(A, baris);
         // invers.inversGaussJordan(A, baris);
         // System.out.println("Solusi SPL dengan metode Invers :");
         // spl.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
-        System.out.println("Solusi SPL nya kak");
+        // System.out.println("Solusi SPL nya kak");
         // spl.SPLGauss(A, baris, kolom);
         // SPL.SPLCramer(A, baris, kolom);
         spl.SPLGaussJordan(A, baris, kolom);
