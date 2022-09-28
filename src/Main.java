@@ -1,4 +1,6 @@
-import java.util.Scanner; // for I/O purposes
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
 
@@ -187,9 +189,109 @@ public class Main {
                 }
             } else if (menu == 5) {
                 // bicubic
-                if (input == 1) {
+                // Assign matr dengan matriks bicubic hasil mikir sejam kita
+                double[][] matr = bicubic.matriksBicubic();
 
+                // Inverskan matriks tersebut
+                invers.inversGaussJordan(matr, 16);
+
+                // Define matriks dan nilai yang akan dianalisis
+                double[][] A = new double[4][4];
+                double[][] trans1 = new double[4][4];
+                double[][] pers = new double[16][1];
+                double[][] kali = new double[16][1];
+                double[][] xval = new double[1][4];
+                double[][] yval = new double[4][1];
+                double[][] hasil1 = new double[1][4];
+                double[][] hasil2 = new double[1][1];
+
+                // assign default x dan y (biar ga error)
+                double x = 0;
+                double y = 0;
+
+                if (input == 1) {
+                    // Nah sekarang minta matriks
+                    System.out.println("Masukkan matriks yang akan di interpolasi bicubic");
+                    int m, n;
+
+                    Scanner scan = new Scanner(System.in);
+                    for (m = 0; m < 4; m++) {
+                        for (n = 0; n < 4; n++) {
+                            A[m][n] = scan.nextDouble();
+                        }
+                    }
+
+                    // Masukkan titik yang ingin dianalisis
+                    System.out.println("Masukkan nilai x yang akan dianalisis");
+                    x = scan.nextDouble();
+                    System.out.println("Masukkan nilai y yang akan dianalisis");
+                    y = scan.nextDouble();
+
+                    scan.close();
+                } else { // input == 2 (dari file)
+                    System.out.println("Masukkan path dari file yang ingin dibaca");
+                    String path = sc.next();
+                    try {
+                        File myObj = new File(path);
+                        Scanner myReader = new Scanner(myObj);
+                        int i = 0;
+                        int j = 0;
+                        while (myReader.hasNextLine()) {
+                            if (i > 3) {
+                                break;
+                            }
+                            String data = myReader.nextLine();
+                            String[] splitStr = data.split("\\s+");
+                            j = 0;
+                            for (String str : splitStr) {
+                                A[i][j] = Double.parseDouble(str);
+                                j += 1;
+                            }
+                            i += 1;
+                        }
+                        String data = myReader.nextLine();
+                        String[] splitStr = data.split("\\s+");
+                        x = Double.parseDouble(splitStr[0]);
+                        y = Double.parseDouble(splitStr[1]);
+
+                        System.out.println("Berhasil membaca file pada: " + path);
+                        myReader.close();
+
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
                 }
+
+                // Transpose dulu matriks yang diinputkan
+                trans1 = bicubic.matriksTranspose(A, 4, 4);
+
+                // Konversi dari bentuk 4x4 jadi 16x1
+                pers = bicubic.matriksConvert(trans1, 4, 4, 16, 1);
+
+                // Perkalian transpose dengan matriks kofaktor kitah, ketemu koef A
+                kali = bicubic.matriksKali(matr, pers, 16, 1, 16);
+
+                // Konversi hasil koef A dari 16x1 ke 4x4
+                A = bicubic.matriksConvert(kali, 16, 1, 4, 4);
+
+                // Transpose koef
+                A = bicubic.matriksTranspose(A, 4, 4);
+
+                // Bikin list baru isinya [1,x,x^2,x^3] sama [1,y,y^2,y^3]
+                for (int i = 0; i < 4; i++) {
+                    xval[0][i] = Math.pow(x, i);
+                    yval[i][0] = Math.pow(y, i);
+                }
+
+                // Perkalian matriks
+                hasil1 = bicubic.matriksKali(xval, A, 1, 4, 4);
+
+                hasil2 = bicubic.matriksKali(hasil1, yval, 1, 1, 4);
+
+                // Keluar nilainya YEY
+                System.out.println("Nilai hasil interpolasi adalah");
+                System.out.printf("%.2f", hasil2[0][0]);
             } else if (menu == 6) {
                 // regresi
                 if (input == 1) {
