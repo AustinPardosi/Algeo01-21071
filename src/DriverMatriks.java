@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class DriverMatriks {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TESTING readByFile then output the matrix
         // InputOutput IO = new InputOutput();
 
@@ -9,43 +10,43 @@ class DriverMatriks {
         // IO.writeFile("test/writeFileTesting.txt", matrix);
 
         // Baca Input
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Masukkan jumlah baris");
-        int baris = sc.nextInt();
-        System.out.println("Masukkan jumlah kolom");
-        int kolom = sc.nextInt();
+        // Scanner sc = new Scanner(System.in);
+        // System.out.println("Masukkan jumlah baris");
+        // int baris = sc.nextInt();
+        // System.out.println("Masukkan jumlah kolom");
+        // int kolom = sc.nextInt();
 
-        // Define matriks
-        // Bikin sesuai ide, perbesar sampe bisa selesain x 
-        int selisih = kolom - (baris + 1);
-        double[][] A = new double[baris + selisih][kolom];
+        // // Define matriks
+        // // Bikin sesuai ide, perbesar sampe bisa selesain x 
+        // int selisih = kolom - (baris + 1);
+        // double[][] A = new double[baris + selisih][kolom];
 
-        // System.out.printf("%d",selisih);
+        // // System.out.printf("%d",selisih);
 
-        // Manggil fungsi eksternal
-        InputOutput M = new InputOutput();
-        // Gauss ge = new Gauss();
-        // GaussJordan gj = new GaussJordan();
-        // SPL spl = new SPL();
-        // Invers invers = new Invers();
-        // Kofaktor k = new Kofaktor();
+        // // Manggil fungsi eksternal
+        // InputOutput M = new InputOutput();
+        // // Gauss ge = new Gauss();
+        // // GaussJordan gj = new GaussJordan();
+        // // SPL spl = new SPL();
+        // // Invers invers = new Invers();
+        // // Kofaktor k = new Kofaktor();
 
-        // Baca matriks
-        System.out.println("Baca matriks");
-        M.readByKeyboard(A, baris, kolom);
+        // // Baca matriks
+        // System.out.println("Baca matriks");
+        // M.readByKeyboard(A, baris, kolom);
 
-        // Handling kasus matriks nilainya lebih kecil
-        if (selisih > 0) {
-            for (int p = 0; p < selisih; p++) {
-                for (int h = 0; h < kolom; h++) {
-                    A[baris + p][h] = 0;
-                }
-            }
-            baris += selisih;
-        }
+        // // Handling kasus matriks nilainya lebih kecil
+        // if (selisih > 0) {
+        //     for (int p = 0; p < selisih; p++) {
+        //         for (int h = 0; h < kolom; h++) {
+        //             A[baris + p][h] = 0;
+        //         }
+        //     }
+        //     baris += selisih;
+        // }
 
-        System.out.println("Cetak matriks");
-        M.printToScreen(A, baris, kolom);
+        // System.out.println("Cetak matriks");
+        // M.printToScreen(A, baris, kolom);
 
         // Penyelesaian determinan
         // System.out.println("Determinannya adalah");
@@ -69,7 +70,7 @@ class DriverMatriks {
         // System.out.println("Solusi SPL nya kak");
         // spl.SPLGauss(A, baris, kolom);
         // SPL.SPLCramer(A, baris, kolom);
-        spl.SPLGaussJordan(A, baris, kolom);
+        // spl.SPLGaussJordan(A, baris, kolom);
 
         // Penyelesaian inverse
         // System.out.println("Inversnya adalah");
@@ -83,6 +84,8 @@ class DriverMatriks {
         // System.out.println("Bentuk eselon baris");
         // M.printToScreen(A, baris, kolom);
 
-        sc.close();
+        RegresiLinierBerganda.regresiLinierBerganda();
+
+        // sc.close();
     }
 }
