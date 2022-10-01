@@ -125,7 +125,7 @@ public class Main {
                 }
 
                 switch (menu) {
-                    case 1:
+                    case 1: // SPL
                         switch (subMenu) {
                             case 'a':
                                 // SPLGauss
@@ -262,20 +262,17 @@ public class Main {
                     System.out.println("Masukkan matriks yang akan di interpolasi bicubic");
                     int m, n;
 
-                    Scanner scan = new Scanner(System.in);
                     for (m = 0; m < 4; m++) {
                         for (n = 0; n < 4; n++) {
-                            A[m][n] = scan.nextDouble();
+                            A[m][n] = sc.nextDouble();
                         }
                     }
 
                     // Masukkan titik yang ingin dianalisis
                     System.out.println("Masukkan nilai x yang akan dianalisis");
-                    x = scan.nextDouble();
+                    x = sc.nextDouble();
                     System.out.println("Masukkan nilai y yang akan dianalisis");
-                    y = scan.nextDouble();
-
-                    scan.close();
+                    y = sc.nextDouble();
                 } else { // input == 2 (dari file)
                     System.out.println("Masukkan path dari file yang ingin dibaca");
                     String path = sc.next();
