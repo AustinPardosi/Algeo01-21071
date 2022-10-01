@@ -230,45 +230,65 @@ public class SPL {
     // 4. SPL Cramer
     public double[] SPLCramer(double[][] matr, int baris, int kolom) {
         // idenya buat Ax = b; dimana A = cramer, B= jawaban
-        double[][] cramer = new double[baris][baris];
-        double[][] jawaban = new double[baris][1];
+        double[][] matriksPersegi = MatriksPersegi(matr); // bagian A
+        double[][] jawaban = new double[baris][1]; // bagian b
         double[] hasil = new double[baris];
-
-        // copy elemen matr (yang bagian A saja) ke cramer
-        for (int i = 0; i < baris; i++) {
-            for (int j = 0; j < baris; j++) {
-                cramer[i][j] = matr[i][j];
-            }
-        }
+        int count = 0;
 
         // copy elemen matr (kolom terakhir) ke jawaban
         for (int i = 0; i < baris; i++) {
-            jawaban[i][0] = matr[i][kolom - 1];
+            jawaban[i][0] = matr[i][kolom - 1]; 
         }
 
         // membuat matriks test untuk setiap kolom dan menghitung nilai masing2 variabel
         // x
-        for (int k = 0; k < baris; k++) {
+        for (int k = 0; k < (kolom - 1); k++) {
             double[][] test = new double[baris][kolom - 1];
             for (int i = 0; i < baris; i++) {
-                for (int j = 0; j < baris; j++) {
+                for (int j = 0; j < (kolom-2); j++) {
                     if (k == j) {
                         test[i][j] = jawaban[i][0];
                     } else {
-                        test[i][j] = cramer[i][j];
+                        test[i][j] = matr[i][j];
                     }
                 }
             }
             // cari nilai x
             // hitung nilai x pada masing2 matriks test
-            double x = det.detKofak(test, baris, kolom - 1) / det.detKofak(cramer, baris, kolom - 1);
-            hasil[k] = x;
+            if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) != 0) {
+                double x = det.detKofak(test, baris, kolom - 1) / det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length);
+                hasil[k] = x;
+            } else {
+                hasil[k] = -999;
+            }
+
             if (hasil[k] == -0) {
                 hasil[k] = 0;
+            }
+            if (hasil[k] == 0) {
+                count += 1;
             }
             System.out.printf("x%d = %.2f \n", k + 1, hasil[k]);
 
         }
+        if (count == (kolom-1)) {
+            System.out.println("Matriks tidak persegi");
+        }
+        if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) == 0) {
+            System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");
+        }
         return hasil;
+    }
+
+    // Membuat matriks persegi dari suatu matriks augmented
+    protected static double[][] MatriksPersegi(double[][] matr) {
+        double[][] matriksBaru = new double[matr.length][matr.length];
+
+        for (int i = 0; i < matr.length; i++) {
+            for (int j = 0; j < matr.length; j++) {
+                matriksBaru[i][j] = matr[i][j];
+            }
+        }
+        return matriksBaru;
     }
 }
