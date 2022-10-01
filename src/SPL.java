@@ -187,11 +187,6 @@ public class SPL {
             }
         }
 
-        // TESTING
-        System.out.println("testing matriks setelah gauss jordan");
-        io.printToScreen(matr, baris, kolom);
-        System.out.println();
-
         // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
         double[] Hasil = new double[baris];
         if (gj.isNoSolution(matr, baris, baris)) {

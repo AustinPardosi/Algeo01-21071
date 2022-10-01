@@ -19,7 +19,7 @@ public class Main {
     // File pengembangan
     static Polinom polinom = new Polinom();
     static Bicubic bicubic = new Bicubic();
-    static Regresi regresi = new Regresi();
+    static RegresiLinierBerganda regresi = new RegresiLinierBerganda();
 
     public static void main(String[] args) {
         String listMenu = """
@@ -59,6 +59,11 @@ public class Main {
                 menu = sc.nextInt();
             }
             System.out.println();
+
+            if (menu == 7) {
+                System.out.println("Terima kasih telah menggunakan kalkulator matriks kami.");
+                break;
+            }
 
             char subMenu = 'a'; // default subMenu
             if (menu == 1 || menu == 2 || menu == 3) {
@@ -104,7 +109,8 @@ public class Main {
                     // Define matriks
                     matr = new double[baris][kolom];
                     System.out.println("Baca matriks");
-                    IO.readByKeyboard(matr, baris, kolom);
+                    IO.readByKeyboard(sc, matr, baris, kolom);
+
                 } else { // input == 2 (dari file)
                     System.out.println("Masukkan path dari file yang ingin dibaca");
                     String path = sc.next();
@@ -297,9 +303,6 @@ public class Main {
                 if (input == 1) {
 
                 }
-            } else if (menu == 7) {
-                System.out.println("Terima kasih telah menggunakan kalkulator matriks kami.");
-                isContinue = false;
             }
             System.out.println();
         }

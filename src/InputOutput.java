@@ -6,16 +6,13 @@ import java.io.IOException;
 
 class InputOutput {
     // Baca dari keyboard
-    void readByKeyboard(double[][] matr, int M, int N) {
+    void readByKeyboard(Scanner scan, double[][] matr, int M, int N) {
         int i, j;
-
-        Scanner scan = new Scanner(System.in);
         for (i = 0; i < M; i++) {
             for (j = 0; j < N; j++) {
                 matr[i][j] = scan.nextDouble();
             }
         }
-        scan.close();
     }
 
     // Print ke layar
