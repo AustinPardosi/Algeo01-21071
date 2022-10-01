@@ -156,5 +156,6 @@ public class RegresiLinierBerganda {
 
     }       
         // Akhirnya selesai
+        // yuhuuuu
 
 }
