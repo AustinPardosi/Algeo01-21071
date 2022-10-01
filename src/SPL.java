@@ -163,30 +163,30 @@ public class SPL {
     // 3. SPL Gauss Jordan
     public double[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
 
-        double[][] m = new double[baris + 1][kolom];
-        for (int i = 0; i < baris; i++) {
-            for (int j = 0; j < kolom; j++) {
-                m[i][j] = matr[i][j];
-            }
-        }
-        for (int j = 0; j < kolom; j++) {
-            m[baris][j] = 0;
-        }
+        // double[][] m = new double[baris + 1][kolom];
+        // for (int i = 0; i < baris; i++) {
+        //     for (int j = 0; j < kolom; j++) {
+        //         m[i][j] = matr[i][j];
+        //     }
+        // }
+        // for (int j = 0; j < kolom; j++) {
+        //     m[baris][j] = 0;
+        // }
 
         // Mengembalikan array of string berisi hasil kalkulasi SPL dengan metode Gauss
         // Jordan
-        gj.gaussJordan(m, baris + 1, kolom);
+        gj.gaussJordan(matr, baris, kolom);
 
-        for (int i = 0; i < baris; i++) {
-            if (!ge.barisNol(m, kolom, i)) {
-                for (int j = 0; j < kolom; j++) {
-                    matr[i][j] = m[i][j];
-                }
-            } else {
-                baris = i;
-                break;
-            }
-        }
+        // for (int i = 0; i < baris; i++) {
+        //     if (!ge.barisNol(m, kolom, i)) {
+        //         for (int j = 0; j < kolom; j++) {
+        //             matr[i][j] = m[i][j];
+        //         }
+        //     } else {
+        //         baris = i;
+        //         break;
+        //     }
+        // }
 
         // Cek apakah ada baris yang matrixnya nol dan hasilnya tidak nol
         double[] Hasil = new double[baris];

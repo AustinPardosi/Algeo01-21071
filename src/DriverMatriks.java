@@ -1,5 +1,5 @@
 import java.io.IOException;
-// import java.util.Scanner;
+import java.util.Scanner;
 
 class DriverMatriks {
     public static void main(String[] args) throws IOException {
@@ -10,30 +10,33 @@ class DriverMatriks {
         // IO.writeFile("test/writeFileTesting.txt", matrix);
 
         // Baca Input
-        // Scanner sc = new Scanner(System.in);
-        // System.out.println("Masukkan jumlah baris");
-        // int baris = sc.nextInt();
-        // System.out.println("Masukkan jumlah kolom");
-        // int kolom = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukkan jumlah baris");
+        int baris = sc.nextInt();
+        System.out.println("Masukkan jumlah kolom");
+        int kolom = sc.nextInt();
 
         // // Define matriks
         // // Bikin sesuai ide, perbesar sampe bisa selesain x
         // int selisih = kolom - (baris + 1);
         // double[][] A = new double[baris + selisih][kolom];
+        double[][] A = new double[baris][kolom];
+
+
 
         // // System.out.printf("%d",selisih);
 
         // // Manggil fungsi eksternal
-        // InputOutput M = new InputOutput();
+        InputOutput M = new InputOutput();
         // // Gauss ge = new Gauss();
         // // GaussJordan gj = new GaussJordan();
-        // // SPL spl = new SPL();
+        SPL spl = new SPL();
         // // Invers invers = new Invers();
         // // Kofaktor k = new Kofaktor();
 
         // // Baca matriks
-        // System.out.println("Baca matriks");
-        // M.readByKeyboard(A, baris, kolom);
+        System.out.println("Baca matriks");
+        M.readByKeyboard(sc, A, A.length, A[0].length);
 
         // // Handling kasus matriks nilainya lebih kecil
         // if (selisih > 0) {
@@ -67,10 +70,10 @@ class DriverMatriks {
         // spl.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
-        // System.out.println("Solusi SPL nya kak");
-        // spl.SPLGauss(A, baris, kolom);
+        System.out.println("Solusi SPL nya kak");
+        // spl.SPLGauss(A, A.length, A[0].length);
         // SPL.SPLCramer(A, baris, kolom);
-        // spl.SPLGaussJordan(A, baris, kolom);
+        spl.SPLGaussJordan(A, baris, kolom);
 
         // Penyelesaian inverse
         // System.out.println("Inversnya adalah");
