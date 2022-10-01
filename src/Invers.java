@@ -77,7 +77,6 @@ public class Invers {
                 }
             }
         }
-        M.printToScreen(matr, row, row);
         return matr;
     }
 

@@ -105,4 +105,23 @@ class InputOutput {
             return false;
         }
     }
+
+    boolean writeFileString(String path, String[][] matrix) {
+        try {
+            FileWriter myWriter = new FileWriter(path);
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    myWriter.write((matrix[i][j]) + " ");
+                }
+                myWriter.write("\n");
+            }
+            myWriter.write("\n");
+            myWriter.close();
+            System.out.println("Berhasil menuliskan hasil pada: " + path);
+            return true;
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            return false;
+        }
+    }
 }

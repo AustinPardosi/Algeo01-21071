@@ -23,6 +23,7 @@ public class Main {
 
     static double[] res;
     static double[][] m;
+    static String[][] text;
 
     public static void main(String[] args) {
         String listMenu = """
@@ -189,6 +190,7 @@ public class Main {
 
                                 System.out.println("Matriks balikan:");
                                 m = invers.inversGaussJordan(matr, baris);
+                                IO.printToScreen(m, baris, baris);
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
@@ -204,23 +206,24 @@ public class Main {
                 }
             } else if (menu == 4) {
                 // polinom
+                text = new String[2][1];
                 if (input == 1) { // dari keyboard
                     // Baca Input
                     System.out.println("Masukkan nilai n");
                     int n = sc.nextInt();
-                    System.out.println("Masukkan jumlah titik");
-                    int totalPoint = sc.nextInt();
                     System.out.println("Baca titik");
-                    double[][] points = new double[totalPoint][2];
+                    double[][] points = new double[n][2];
 
-                    for (int i = 0; i < totalPoint; i++) {
+                    for (int i = 0; i < n; i++) {
                         for (int j = 0; j < 2; j++) {
                             points[i][j] = sc.nextDouble();
                         }
                     }
                     System.out.println("Masukkan nilai x yang ingin ditafsir");
                     int x = sc.nextInt();
-                    polinom.polinom(n, points, x);
+                    text = polinom.polinom(n, points, x);
+
+                    IO.writeFileString("test/writeFileTesting.txt", text);
                 } else { // input == 2 (dari file)
                     System.out.println("Masukkan path dari file yang ingin dibaca");
                     String path = sc.next();
@@ -228,7 +231,9 @@ public class Main {
                     System.out.println();
                     System.out.println("Masukkan nilai x yang ingin ditafsir");
                     int x = sc.nextInt();
-                    polinom.polinom(points.length, points, x);
+                    text = polinom.polinom(points.length, points, x);
+
+                    IO.writeFileString("test/writeFileTesting.txt", text);
                 }
             } else if (menu == 5) {
                 // bicubic
@@ -334,7 +339,13 @@ public class Main {
 
                 // Keluar nilainya YEY
                 System.out.println("Nilai hasil interpolasi adalah");
-                System.out.printf("%.2f", hasil2[0][0]);
+                System.out.printf("%.2f\n", hasil2[0][0]);
+
+                m = new double[1][1];
+                m[0][0] = hasil2[0][0];
+
+                IO.writeFile("test/writeFileTesting.txt", m);
+
             } else if (menu == 6) {
                 // regresi
                 if (input == 1) {
