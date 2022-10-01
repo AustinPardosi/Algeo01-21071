@@ -34,8 +34,8 @@ public class RegresiLinierBerganda {
                 }
                 y[i] = sc.nextDouble();
             }
-            InputOutput io = new InputOutput();
-            io.printToScreen(matriks, m, n);
+            // InputOutput io = new InputOutput();
+            // io.printToScreen(matriks, m, n);
         } else /* pilihan 2 */ {
             // membaca dari file
             System.out.println("Masukkan path : ");
@@ -65,17 +65,18 @@ public class RegresiLinierBerganda {
         }
 
         // Sisa taksiran
-        // System.out.println();
-        // System.out.println("Taksiran nilai fungsi");
-        // double[] taksir = new double [hasil.length];
-        // for (int i=0; i<hasil.length-1; i++){
-        //     taksir[i] = sc.nextDouble();
-        // }
-        // double result = hasil[0];
-        // for (int i = 0; i < hasil.length - 1; i++) {
-        //     result += hasil[i + 1] * taksir[i];
-        // }
-        // System.out.printf("Nilai taksirannya adalah %f\n\n", result);
+        System.out.println();
+        System.out.println("\nTaksiran nilai fungsi");
+        System.out.printf("Masukkan %d peubah yang ingin ditaksir : \n", hasil.length-1);
+        double[] taksir = new double [hasil.length];
+        for (int i=0; i<hasil.length-1; i++){
+            taksir[i] = sc.nextDouble();
+        }
+        double result = hasil[0];
+        for (int i = 0; i < hasil.length - 1; i++) {
+            result += hasil[i + 1] * taksir[i];
+        }
+        System.out.printf("Nilai taksirannya adalah %.03f\n", result);
     
     }
 
@@ -117,12 +118,6 @@ public class RegresiLinierBerganda {
         System.out.println("\nDengan Normal Estimation Equation, diperoleh matrix SPL sebagai berikut");
         io.printToScreen(SPL, kolom+1, kolom+2);
 
-        // // Pakai metode gauss jordan
-        // Gauss ga = new Gauss();
-        // ga.gauss(SPL, kolom+1, kolom+2);
-        // System.out.println("\nSetelah di gj");
-        // io.printToScreen(SPL, kolom, kolom);
-
         // Nilai X'X saja
         double[][] xX = new double[kolom+1][kolom+1];
         for(int i=0; i<=kolom; i++) {
@@ -130,46 +125,36 @@ public class RegresiLinierBerganda {
                 xX[i][j] = SPL[i][j];
             }
         }
-        System.out.println("\nX'x : ");
-        io.printToScreen(xX, kolom+1, kolom+1);
+        // System.out.println("\nMatriks dari X'x : ");
+        // io.printToScreen(xX, kolom+1, kolom+1);
 
         // Nilai Y saja
         double[][] x = new double[kolom+1][kolom+1];
         for(int i=0; i<=kolom; i++) {
             for(int j=0; j<kolom+1; j++) {    
                 x[i][j] = SPL[i][kolom+1];
-                System.out.println(x[i][j]);
             }
         }
 
         // Nilai invers X'X
         Invers iv = new Invers();
+        double[][] hasilInvers = new double[kolom+1][kolom+1];
         System.out.println("\n(X'x)^-1 : ");
-        iv.inverseAdjoint(xX, kolom+1, kolom+1); // TERNYATA DISINI dia cuma ngeprint si inverseAdjoint xX tanpa disimpan di xX jd
-                                                // begitu dipanggil xX dia bukan ngeoutput si inversenya tp sebelum di inverse
-
+        hasilInvers = iv.inverseAdjoint(xX, kolom+1, kolom+1);
+        System.out.println();
+        
         double[] temp = new double[kolom+1];
         // Kalikan matrix X'X dan Y
         for(int i=0; i<kolom+1; i++) {
             temp[i] = 0;
             for(int j=0; j<kolom+1; j++) {
-                temp[i] += xX[i][j] * x[j][i];
-                System.out.println(temp[i]);
+                temp[i] += hasilInvers[i][j] * x[j][i];
             }
-            System.out.println(temp[i]);
         }
         
         return temp;
 
-        // GAISS HELPP
-        // Intinya itu si invers X'X (var=xX) harus dikalikan dengan matriks Y (var=x) 
-        // dimana nanti hasilnya harus berupa 3x1.
-        // cuma itu aja kurangnya
-
-        // Baru sadar sisa taksiran juga belum bener
-        // AUSTIN PERBAIKI SISA TAKSIRANNNN :)
-
     }       
-        // sihiy progress austin wkwkwk
+        // Akhirnya selesai
 
 }
