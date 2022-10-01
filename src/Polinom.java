@@ -15,7 +15,7 @@
 // 𝑓(𝑥)= -0.0064𝑥^2 + 0.2266x + 0.6762 , 𝑓(5) = … 
 
 public class Polinom {
-    String[][] polinom(int n, double[][] points, int x) {
+    String[][] polinom(int n, double[][] points, double x) {
         String[][] res = new String[2][1];
         double[][] aug = new double[n][n + 1];
 
@@ -56,7 +56,7 @@ public class Polinom {
 
         res[1][0] = "f(" + x + ") = " + Math.round(calculate * 1000.0) / 1000.0;
         System.out.println();
-        System.out.printf("f(%d) = ", x);
+        System.out.printf("f(%.02f) = ", x);
         System.out.printf("%.03f\n", calculate);
 
         return res;

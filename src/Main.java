@@ -220,7 +220,7 @@ public class Main {
                         }
                     }
                     System.out.println("Masukkan nilai x yang ingin ditafsir");
-                    int x = sc.nextInt();
+                    double x = sc.nextDouble();
                     text = polinom.polinom(n, points, x);
 
                     IO.writeFileString("test/writeFileTesting.txt", text);
@@ -230,7 +230,7 @@ public class Main {
                     double[][] points = IO.readByFile(path);
                     System.out.println();
                     System.out.println("Masukkan nilai x yang ingin ditafsir");
-                    int x = sc.nextInt();
+                    double x = sc.nextDouble();
                     text = polinom.polinom(points.length, points, x);
 
                     IO.writeFileString("test/writeFileTesting.txt", text);
