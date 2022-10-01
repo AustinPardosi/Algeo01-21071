@@ -347,10 +347,67 @@ public class Main {
                 IO.writeFile("test/writeFileTesting.txt", m);
 
             } else if (menu == 6) {
+                double[][] matriks;
+                double[] y;
+                int n, m; // n = jumlah peubah x, m = jumlah sampel
                 // regresi
                 if (input == 1) {
+                    // masukan dari pengguna
+                    System.out.println("Masukkan jumlah peubah : ");
+                    n = sc.nextInt();
+                    System.out.println("Masukkan jumlah sampel : ");
+                    m = sc.nextInt();
+                    System.out.println("Masukkan matriks persamaan : ");
+                    matriks = new double[m][n];
+                    y = new double[m];
 
+                    for (int i = 0; i < m; i++) {
+                        for (int j = 0; j < n; j++) {
+                            matriks[i][j] = sc.nextDouble();
+                        }
+                        y[i] = sc.nextDouble();
+                    }
+                } else { // input == 2 (dari file)
+                    System.out.println("Masukkan path dari file yang ingin dibaca");
+                    String path = sc.next();
+                    double[][] tempMatrix = IO.readByFile(path);
+                    matriks = new double[tempMatrix.length][tempMatrix[0].length - 1];
+                    y = new double[tempMatrix.length];
+                    for (int i = 0; i < matriks.length; i++) {
+                        for (int j = 0; j < matriks[i].length; j++) {
+                            matriks[i][j] = tempMatrix[i][j];
+                        }
+                        y[i] = tempMatrix[i][tempMatrix[0].length - 1];
+                    }
                 }
+
+                // Hasil dari regresi linier
+                double[] hasil = regresi.hasilRegresi(matriks, y);
+
+                // Output persamaan regresi linier berganda
+                System.out.printf("Persamaan hasil regresi linier berganda adalah y = %.2f", hasil[0]);
+                for (int i = 1; i < hasil.length; i++) {
+                    if (hasil[i] > 0) {
+                        System.out.printf(" + %.2f x%d", hasil[i], i);
+                    } else {
+                        System.out.printf(" %.2f x%d", hasil[i], i);
+                    }
+                }
+
+                // Sisa taksiran
+                System.out.println();
+                System.out.println("\nTaksiran nilai fungsi");
+                System.out.printf("Masukkan %d peubah yang ingin ditaksir : \n", hasil.length - 1);
+                double[] taksir = new double[hasil.length];
+                for (int i = 0; i < hasil.length - 1; i++) {
+                    taksir[i] = sc.nextDouble();
+                }
+                double result = hasil[0];
+                for (int i = 0; i < hasil.length - 1; i++) {
+                    result += hasil[i + 1] * taksir[i];
+                }
+                System.out.printf("Nilai taksirannya adalah %.03f\n", result);
+
             }
             System.out.println();
         }

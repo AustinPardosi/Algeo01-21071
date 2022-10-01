@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 class DriverMatriks {
     public static void main(String[] args) throws IOException {
@@ -17,7 +17,7 @@ class DriverMatriks {
         int kolom = sc.nextInt();
 
         // // Define matriks
-        // // Bikin sesuai ide, perbesar sampe bisa selesain x 
+        // // Bikin sesuai ide, perbesar sampe bisa selesain x
         // int selisih = kolom - (baris + 1);
         // double[][] A = new double[baris + selisih][kolom];
         double[][] A = new double[baris][kolom];
@@ -40,12 +40,12 @@ class DriverMatriks {
 
         // // Handling kasus matriks nilainya lebih kecil
         // if (selisih > 0) {
-        //     for (int p = 0; p < selisih; p++) {
-        //         for (int h = 0; h < kolom; h++) {
-        //             A[baris + p][h] = 0;
-        //         }
-        //     }
-        //     baris += selisih;
+        // for (int p = 0; p < selisih; p++) {
+        // for (int h = 0; h < kolom; h++) {
+        // A[baris + p][h] = 0;
+        // }
+        // }
+        // baris += selisih;
         // }
 
         // System.out.println("Cetak matriks");
