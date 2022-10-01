@@ -42,7 +42,7 @@ public class Invers {
             if (aug[i][i] == 0) {
                 System.out.println("Matriks tidak memiliki balikan");
                 singular = true;
-                break; // keluar dari loop
+                return matr;
             }
 
             // ini intinya ngelakuin gauss jordan ke matriks aug nya
@@ -72,10 +72,12 @@ public class Invers {
         if (!singular) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < row; j++) {
-                    matr[i][j] = aug[i][j + row]; // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+                    // lagi-lagi, kolomnya ditambah row supaya dapet nilai si inversnya
+                    matr[i][j] = Math.round((aug[i][j + row]) * 1000.0) / 1000.0;
                 }
             }
         }
+        M.printToScreen(matr, row, row);
         return matr;
     }
 
@@ -111,7 +113,7 @@ public class Invers {
     }
 
     // 2. Inverse by adjoint
-    void inverseAdjoint(double[][] matr, int baris, int kolom) {
+    double[][] inverseAdjoint(double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks adjoint dulu
         double[][] inverse = new double[baris][kolom];
 
@@ -119,6 +121,7 @@ public class Invers {
         double determinan = d.detKofak(matr, baris, kolom);
         if (determinan == 0) {
             System.out.println("Matriks tidak memiliki invers.");
+            return matr; // kalo ga punya invers, return matriks awal
         } else {
             // Ya biasa bikin double loop
             for (int i = 0; i < baris; i += 1) {
@@ -129,5 +132,6 @@ public class Invers {
             }
             M.printToScreen(inverse, baris, kolom);
         }
+        return inverse;
     }
 }

@@ -21,6 +21,9 @@ public class Main {
     static Bicubic bicubic = new Bicubic();
     static RegresiLinierBerganda regresi = new RegresiLinierBerganda();
 
+    static double[] res;
+    static double[][] m;
+
     public static void main(String[] args) {
         String listMenu = """
                 1. Sistem Persamaaan Linier
@@ -119,24 +122,40 @@ public class Main {
                     kolom = matr[0].length;
                     System.out.println();
                 }
+
                 switch (menu) {
                     case 1:
                         switch (subMenu) {
                             case 'a':
                                 // SPLGauss
-                                SPL.SPLGauss(matr, baris, kolom);
+                                res = SPL.SPLGauss(matr, baris, kolom);
+                                m = new double[res.length][1];
+
+                                for (int i = 0; i < res.length; i++) {
+                                    m[i][0] = res[i];
+                                }
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 // SPLGaussJordan
-                                SPL.SPLGaussJordan(matr, baris, kolom);
+                                res = SPL.SPLGaussJordan(matr, baris, kolom);
+                                m = new double[res.length][1];
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'c':
                                 // SPLInvers
-                                SPL.SPLInvers(matr, baris, kolom);
+                                m = SPL.SPLInvers(matr, baris, kolom);
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'd':
                                 // SPLCramer
-                                SPL.SPLCramer(matr, baris, kolom);
+                                res = SPL.SPLCramer(matr, baris, kolom);
+                                m = new double[res.length][1];
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;
@@ -144,11 +163,21 @@ public class Main {
                         switch (subMenu) {
                             case 'a':
                                 // detGauss
-                                determinan.detGauss(matr, baris, kolom);
+                                m = new double[1][1];
+                                m[0][0] = determinan.detGauss(matr, baris, kolom);
+
+                                System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 // detKofaktor
-                                determinan.detKofak(matr, baris, kolom);
+                                m = new double[1][1];
+                                m[0][0] = determinan.detKofak(matr, baris, kolom);
+
+                                System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
+
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;
@@ -156,11 +185,19 @@ public class Main {
                         switch (subMenu) {
                             case 'a':
                                 // inversGaussJordan
-                                invers.inversGaussJordan(matr, baris);
+                                m = new double[baris][baris];
+
+                                System.out.println("Matriks balikan:");
+                                m = invers.inversGaussJordan(matr, baris);
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 // inversAdjoint
-                                invers.inverseAdjoint(matr, baris, kolom);
+                                m = new double[baris][baris];
+
+                                System.out.println("Matriks balikan:");
+                                m = invers.inverseAdjoint(matr, baris, kolom);
+                                IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;

@@ -98,7 +98,7 @@ class InputOutput {
             }
             myWriter.write("\n");
             myWriter.close();
-            System.out.println("Berhasil menuliskan file pada: " + path);
+            System.out.println("Berhasil menuliskan hasil pada: " + path);
             return true;
         } catch (IOException e) {
             System.out.println("An error occurred.");

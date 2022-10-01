@@ -6,7 +6,7 @@ public class SPL {
     static Determinan det = new Determinan();
     InputOutput io = new InputOutput();
 
-    // [ procedure SPLInvers ]
+    // [ function SPLInvers ]
     // Desc :
     // mencari solusi SPL dengan metode invers
     // inversnya pake gauss jordan
@@ -15,7 +15,7 @@ public class SPL {
     // - row (jumlah baris)
     // - col (jumlah kolom, yaitu row + 1 karena ketambahan b)
     // prekondisi : masukannya matriks augmented [A | b] untuk persamaan Ax = b
-    void SPLInvers(double[][] matr, int row, int col) {
+    double[][] SPLInvers(double[][] matr, int row, int col) {
 
         // jadi idenya kita mau pisah dulu matriks augmentednya jadi A sama b
         // matriks a disimpen di variabel invers (karena nantinya bakal diinvers)
@@ -67,6 +67,7 @@ public class SPL {
                 System.out.printf("x%d = %.2f \n", i + 1, hasil[i][0]);
             }
         }
+        return hasil;
     }
 
     // 2. SPL Gauss
