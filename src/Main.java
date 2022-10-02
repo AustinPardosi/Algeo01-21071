@@ -154,7 +154,7 @@ public class Main {
                                 m = new double[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = res[i];
+                                    m[i][0] = Math.round(res[i] * 1000) / 1000;
                                 }
 
                                 IO.writeFile("test/writeFileTesting.txt", m);
@@ -166,7 +166,7 @@ public class Main {
                                 m = new double[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = res[i];
+                                    m[i][0] = Math.round(res[i] * 1000) / 1000;
                                 }
 
                                 IO.writeFile("test/writeFileTesting.txt", m);
@@ -415,12 +415,12 @@ public class Main {
                 double[] hasil = regresi.hasilRegresi(matriks, y);
 
                 // Output persamaan regresi linier berganda
-                System.out.printf("Persamaan hasil regresi linier berganda adalah y = %.2f", hasil[0]);
+                System.out.printf("Persamaan hasil regresi linier berganda adalah y = %.3f", hasil[0]);
                 for (int i = 1; i < hasil.length; i++) {
                     if (hasil[i] > 0) {
-                        System.out.printf(" + %.2f x%d", hasil[i], i);
+                        System.out.printf(" + %.3f x%d", hasil[i], i);
                     } else {
-                        System.out.printf(" %.2f x%d", hasil[i], i);
+                        System.out.printf(" %.3f x%d", hasil[i], i);
                     }
                 }
 

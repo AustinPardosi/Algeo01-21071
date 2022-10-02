@@ -166,7 +166,7 @@ public class SPL {
             }
 
             for (int m = 0; m < baris; m += 1) {
-                System.out.printf("x%d = %.2f \n", m + 1, hasil[m]);
+                System.out.printf("x%d = %.3f \n", m + 1, hasil[m]);
             }
         }
         return hasil;
@@ -190,7 +190,7 @@ public class SPL {
                         // pindahbarisnol yang
                         // midah barisnol kebawah kan?
                         double pembagi = matr[b][k] / matr[i][k]; // Nentuin pembagi kedua row, sama kek gauss pada
-                                                                    // umumnya
+                                                                  // umumnya
                         ge.kurangi(matr, kolom, pembagi, i, b); // Makanya buat yang ini divide ditambah pengurangan
                     }
                     ge.bagiBaris(matr, kolom, matr[i][k], i); // Yang ini divide aja, jadi misal nol semua, kita tau lah
@@ -251,7 +251,7 @@ public class SPL {
             }
 
             for (int m = 0; m < baris; m += 1) {
-                System.out.printf("x%d = %.2f \n", m + 1, hasil[m]);
+                System.out.printf("x%d = %.3f \n", m + 1, hasil[m]);
             }
         }
         return hasil;
@@ -283,7 +283,7 @@ public class SPL {
             for (int k = 0; k < (kolom - 1); k++) {
                 double[][] test = new double[baris][kolom - 1];
                 for (int i = 0; i < baris; i++) {
-                    for (int j = 0; j <=(kolom - 2); j++) {
+                    for (int j = 0; j <= (kolom - 2); j++) {
                         if (k == j) {
                             test[i][j] = jawaban[i][0];
                         } else {
@@ -317,7 +317,7 @@ public class SPL {
                 System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");
             } else {
                 for (int k = 0; k < (kolom - 1); k++) {
-                    System.out.printf("x%d = %.2f \n", k + 1, hasil[k]);
+                    System.out.printf("x%d = %.3f \n", k + 1, hasil[k]);
                 }
             }
         }
