@@ -44,8 +44,7 @@ public class Main {
                 7. Keluar
                     """;
 
-        System.out.println("SELAMAT DATANG DI KALKULATOR MATRIKS KELOMPOK 2B1");
-        System.out.println();
+        System.out.println("SELAMAT DATANG DI KALKULATOR MATRIKS 2B1");
 
         boolean isContinue = true;
 
@@ -67,6 +66,27 @@ public class Main {
             if (menu == 7) {
                 System.out.println("Terima kasih telah menggunakan kalkulator matriks kami.");
                 break;
+            }
+
+            switch (menu) {
+                case 1:
+                    System.out.println("--- SISTEM PERSAMAAN LINIER ---");
+                    break;
+                case 2:
+                    System.out.println("--- DETERMINAN ---");
+                    break;
+                case 3:
+                    System.out.println("--- MATRIKS BALIKAN ---");
+                    break;
+                case 4:
+                    System.out.println("--- INTERPOLASI POLINOM ---");
+                    break;
+                case 5:
+                    System.out.println("--- INTERPOLASI BICUBIC ---");
+                    break;
+                case 6:
+                    System.out.println("--- REGRESI LINIER BERGANDA ---");
+                    break;
             }
 
             char subMenu = 'a'; // default subMenu
@@ -128,6 +148,7 @@ public class Main {
                     case 1: // SPL
                         switch (subMenu) {
                             case 'a':
+                                System.out.println("~ Sistem Persamaan Linier dengan Metode Eliminasi Gauss ~");
                                 // SPLGauss
                                 res = SPL.SPLGauss(matr, baris, kolom);
                                 m = new double[res.length][1];
@@ -139,6 +160,7 @@ public class Main {
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
+                                System.out.println("~ Sistem Persamaan Linier dengan Metode Eliminasi Gauss-Jordan ~");
                                 // SPLGaussJordan
                                 res = SPL.SPLGaussJordan(matr, baris, kolom);
                                 m = new double[res.length][1];
@@ -146,12 +168,14 @@ public class Main {
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'c':
+                                System.out.println("~ Sistem Persamaan Linier dengan Metode Matriks Balikan ~");
                                 // SPLInvers
                                 m = SPL.SPLInvers(matr, baris, kolom);
 
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'd':
+                                System.out.println("~ Sistem Persamaan Linier dengan Kaidah Cramer ~");
                                 // SPLCramer
                                 res = SPL.SPLCramer(matr, baris, kolom);
                                 m = new double[res.length][1];
@@ -163,6 +187,7 @@ public class Main {
                     case 2:
                         switch (subMenu) {
                             case 'a':
+                                System.out.println("~ Determinan dengan Metode Eliminasi Gauss ~");
                                 // detGauss
                                 m = new double[1][1];
                                 m[0][0] = determinan.detGauss(matr, baris, kolom);
@@ -173,6 +198,7 @@ public class Main {
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
+                                System.out.println("~ Determinan dengan Metode Kofaktor ~");
                                 // detKofaktor
                                 m = new double[1][1];
                                 m[0][0] = determinan.detKofak(matr, baris, kolom);
@@ -187,6 +213,7 @@ public class Main {
                     case 3:
                         switch (subMenu) {
                             case 'a':
+                                System.out.println("~ Matriks Balikan dengan Metode Eliminasi Gauss-Jordan ~");
                                 // inversGaussJordan
                                 m = new double[baris][baris];
 
@@ -196,6 +223,7 @@ public class Main {
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
+                                System.out.println("~ Matriks Balikan dengan Metode Adjoint ~");
                                 // inversAdjoint
                                 m = new double[baris][baris];
 
@@ -271,9 +299,8 @@ public class Main {
                     }
 
                     // Masukkan titik yang ingin dianalisis
-                    System.out.println("Masukkan nilai x yang akan dianalisis");
+                    System.out.println("Masukkan nilai x dan y yang akan dianalisis");
                     x = sc.nextDouble();
-                    System.out.println("Masukkan nilai y yang akan dianalisis");
                     y = sc.nextDouble();
                 } else { // input == 2 (dari file)
                     System.out.println("Masukkan path dari file yang ingin dibaca");
@@ -407,6 +434,9 @@ public class Main {
                 }
                 System.out.printf("Nilai taksirannya adalah %.03f\n", result);
 
+                // buat output ke file (belum selesai)
+                // text = ...;
+                // IO.writeFileString("test/writeFileTesting.txt", text);
             }
             System.out.println();
         }
