@@ -44,16 +44,27 @@ public class Main {
                 7. Keluar
                     """;
 
-        System.out.println("SELAMAT DATANG DI KALKULATOR MATRIKS 2B1");
+        System.out.println("SELAMAT DATANG DI KALKULATOR MATRIKS");
+        System.out.println("");
+        System.out.println("    ██████╗ ██████╗  ██╗  ");
+        System.out.println("    ╚════██╗██╔══██╗███║  ");
+        System.out.println("     █████╔╝██████╔╝╚██║  ");
+        System.out.println("    ██╔═══╝ ██╔══██╗ ██║  ");
+        System.out.println("    ███████╗██████╔╝ ██║  ");
+        System.out.println("    ╚══════╝╚═════╝  ╚═╝  ");
+        System.out.println("");
 
         boolean isContinue = true;
 
-        System.out.println("PILIHAN MENU");
-        System.out.println(listMenu);
+        // System.out.println("PILIHAN MENU");
+        // System.out.println(listMenu);
 
         Scanner sc = new Scanner(System.in); // untuk input keyboard
 
         while (isContinue) {
+            System.out.println("PILIHAN MENU");
+            System.out.println(listMenu);
+
             System.out.println("Masukkan angka menu yang ingin dijalankan (Contoh: 1, 2, 3) :");
             int menu = sc.nextInt();
 
@@ -442,7 +453,9 @@ public class Main {
                 // text = ...;
                 // IO.writeFileString("test/writeFileTesting.txt", text);
             }
-            System.out.println();
+            System.out.println("");
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("");
         }
         sc.close();
     }
