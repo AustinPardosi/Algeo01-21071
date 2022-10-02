@@ -53,8 +53,4 @@ public class Determinan {
         }
         return det;
     }
-
-    public double detKofak(Object matr, int baris, int kolom) {
-        return 0;
-    }
 }
