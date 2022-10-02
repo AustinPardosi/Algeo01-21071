@@ -143,6 +143,10 @@ public class Main {
                                 res = SPL.SPLGaussJordan(matr, baris, kolom);
                                 m = new double[res.length][1];
 
+                                for (int i = 0; i < res.length; i++) {
+                                    m[i][0] = res[i];
+                                }
+
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
                             case 'c':
