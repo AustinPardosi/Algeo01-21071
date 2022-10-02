@@ -13,10 +13,9 @@ public class Determinan {
             det *= ((matr[0][0] * matr[1][1]) - (matr[0][1] * matr[1][0]));
         }
         else {
-            int i = 0; 
+            int i = 0;
             ge.pindahBarisNol (matr, baris, kolom); 
             for (int k = 0; k < kolom; k += 1) {
-                ge.titikPivot (matr, baris, kolom, i, k);
                 if (matr[i][k] != 0) {  
                     for (int b = i + 1; b <= baris; b += 1) {
                         if(b != baris) { 
@@ -49,7 +48,7 @@ public class Determinan {
         }
         else {
             for (int i = 0; i < kolom ; i += 1) {
-                det += matr[0][i] * detGauss(k.hapusBarisKolom (matr, baris, kolom, 0, i), baris - 1, kolom - 1) * Math.pow((-1), i);
+                det += (matr[0][i] * detGauss(k.hapusBarisKolom (matr, baris, kolom, 0, i), baris - 1, kolom - 1) * Math.pow((-1), i));
             }
         }
         return det;

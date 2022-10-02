@@ -29,10 +29,11 @@ class DriverMatriks {
         // // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         // // Gauss ge = new Gauss();
-        GaussJordan gj = new GaussJordan();
+        // GaussJordan gj = new GaussJordan();
         // SPL spl = new SPL();
         // // Invers invers = new Invers();
         // // Kofaktor k = new Kofaktor();
+        Determinan det = new Determinan();
 
         // // Baca matriks
         System.out.println("Baca matriks");
@@ -82,10 +83,14 @@ class DriverMatriks {
         // 2. Inverse dengan gauss-jordan
         // [insert here]
 
+        double a = det.detGauss(A, baris, kolom);
         // Cetak matriks
-        // System.out.println("Cetak matriks");
-        // System.out.println("Bentuk eselon baris");
-        // M.printToScreen(A, baris, kolom);
+        System.out.println("Cetak matriks");
+        System.out.println("Bentuk eselon baris");
+        M.printToScreen(A, baris, kolom);
+
+        System.out.println("Determinan");
+        System.out.printf("%.2f",a);
 
         // RegresiLinierBerganda.regresiLinierBerganda();
         // RegresiLinierBerganda rlb = new RegresiLinierBerganda();
