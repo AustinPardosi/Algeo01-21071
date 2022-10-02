@@ -218,7 +218,7 @@ public class SPL {
             for (int k = 0; k < (kolom - 1); k++) {
                 double[][] test = new double[baris][kolom - 1];
                 for (int i = 0; i < baris; i++) {
-                    for (int j = 0; j < (kolom - 2); j++) {
+                    for (int j = 0; j <=(kolom - 2); j++) {
                         if (k == j) {
                             test[i][j] = jawaban[i][0];
                         } else {
