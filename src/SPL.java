@@ -174,26 +174,88 @@ public class SPL {
 
     // 3. SPL Gauss Jordan
     public double[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
+        Gauss ge = new Gauss();
         GaussJordan gj = new GaussJordan();
-        gj.gaussJordan(matr, baris, kolom);
-        double[] Hasil = new double[baris];
-        if(gj.isNoSolution(matr, baris, kolom)) {
-            System.out.println("SPL Tidak Memiliki Solusi");
-        } else {
-            if(baris == (kolom-1)) {
-                for(int i=0; i<baris; i++) {
-                    Hasil[i] = matr[i][kolom-1];
-                    System.out.printf("x%d = %.2f \n", i + 1, Hasil[i]);
+        // manggil gauss dulu sebelum dilanjutin gauss jordan sampe eselon tereduksi
+        // Prosedur GAUSS
+        // Lagi2 pake algo yang mirip gauss, cuma kita ketambahan 1 kolom lagi
+        int i = 0;
+        ge.pindahBarisNol(matr, baris, kolom);
+        for (int k = 0; k < kolom - 1; k += 1) {
+            ge.titikPivot(matr, baris, kolom, i, k);
+            if (matr[i][k] != 0) {
+                for (int b = i + 1; b <= baris; b += 1) {
+                    if (b != baris) {
+                        // Kalo b = baris, ini bisa error karena kalo kita inget lagi tadi, ada
+                        // pindahbarisnol yang
+                        // midah barisnol kebawah kan?
+                        double pembagi = matr[b][k] / matr[i][k]; // Nentuin pembagi kedua row, sama kek gauss pada
+                                                                    // umumnya
+                        ge.kurangi(matr, kolom, pembagi, i, b); // Makanya buat yang ini divide ditambah pengurangan
+                    }
+                    ge.bagiBaris(matr, kolom, matr[i][k], i); // Yang ini divide aja, jadi misal nol semua, kita tau lah
+                    // kalo 0 dibagi apapun akan tetep 0
                 }
-            } else if (baris < (kolom-1)) {
-                System.out.println("Solusi banyak (parametrik)");
-            } else {
-                System.out.println("Tidak Memiliki Solusi");
+                i += 1; // Ganti baris
             }
         }
-        return Hasil;
-    }
+        // Nilai -0 handler
+        for (int m = 0; m < baris; m += 1) {
+            for (int n = 0; n < kolom; n += 1) {
+                if (matr[m][n] == -0) {
+                    matr[m][n] = 0;
+                }
+            }
+        }
 
+        // looping kolom
+        for (int j = 0; j < kolom; j++) {
+            // cari indeks baris leading one di kolom j
+            int leadingOneRow = gj.leadingOneRow(matr, baris, j);
+
+            for (int p = 0; p < leadingOneRow; p++) {
+                if (matr[p][j] != 0) {
+                    double pengali = matr[p][j];
+                    for (int k = j; k < kolom; k++) {
+                        matr[p][k] -= pengali * matr[leadingOneRow][k];
+                        if (matr[p][k] == -0) {
+                            matr[p][k] = 0;
+                        }
+                    }
+                } else if (matr[p][j] == -0) {
+                    matr[p][j] = 0;
+                }
+            }
+        }
+
+        // Inisiasi, Nyari kolom terakhir
+        double[] nilai = new double[baris];
+        for (int m = 0; m < baris; m += 1) {
+            nilai[m] = matr[m][kolom - 1];
+        }
+        // List nilai keiisi sama elemen terakhir di sebuah baris
+
+        // Nah ini yang susah, substitusi balik buat nentuin solusi
+        double[] hasil = new double[baris]; // Inisiasi list hasil
+        if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
+            System.out.println("SPL Tidak memiliki solusi");
+        } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
+            System.out.println("SPL memiliki banyak solusi");
+            // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
+        } else {
+            for (int m = baris - 1; m >= 0; m -= 1) {
+                hasil[m] = nilai[m];
+                for (int n = 1; n <= baris - m - 1; n += 1) {
+                    hasil[m] = hasil[m] - matr[m][m + n] * hasil[m + n];
+                }
+            }
+
+            for (int m = 0; m < baris; m += 1) {
+                System.out.printf("x%d = %.2f \n", m + 1, hasil[m]);
+            }
+        }
+        return hasil;
+    }
 
     // 4. SPL Cramer
     public double[] SPLCramer(double[][] matr, int baris, int kolom) {
