@@ -169,31 +169,6 @@ public class GaussJordan {
         return false;
     }
 
-    // Fungsi untuk memotong matriks yang memiliki beberapa baris yang semua
-    // elemennya bernilai nol
-    double[][] createMatEff(double[][] matr) {
-        int countRowAllZero = 0;
-        for (int i = 0; i < matr.length; i++) {
-            if (ge.barisNol(matr, matr[0].length, i)) {
-                countRowAllZero++;
-            }
-        }
-        if (countRowAllZero == 0) {
-            return matr;
-        } else {
-            int barisEff = matr.length - countRowAllZero;
-            int kolomEff = matr[0].length;
-            double[][] matriksBaru = new double[barisEff][kolomEff];
-
-            for (int i = 0; i < barisEff; i++) {
-                for (int j = 0; j < kolomEff; j++) {
-                    matriksBaru[i][j] = matr[i][j];
-                }
-            }
-            return matriksBaru;
-        }   
-    }
-
 }
 // sekali lagi, kalo ga ngerti tanya aku aja ya
 // rada bingung kalo jelasin pake ketikan gini

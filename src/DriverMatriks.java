@@ -29,8 +29,8 @@ class DriverMatriks {
         // // Manggil fungsi eksternal
         InputOutput M = new InputOutput();
         // // Gauss ge = new Gauss();
-        // // GaussJordan gj = new GaussJordan();
-        SPL spl = new SPL();
+        GaussJordan gj = new GaussJordan();
+        // SPL spl = new SPL();
         // // Invers invers = new Invers();
         // // Kofaktor k = new Kofaktor();
 
@@ -70,9 +70,9 @@ class DriverMatriks {
         // spl.SPLInvers(A, baris, kolom);
 
         // Mencari solusi SPL dengan gauss
-        System.out.println("Solusi SPL nya kak");
-        // spl.SPLGauss(A, A.length, A[0].length);
-        spl.SPLCramer(A, baris, kolom);
+        // System.out.println("Solusi SPL nya kak");
+        // // spl.SPLGauss(A, A.length, A[0].length);
+        // spl.SPLCramer(A, baris, kolom);
         // spl.SPLGaussJordan(A, baris, kolom);
 
         // Penyelesaian inverse
@@ -88,6 +88,8 @@ class DriverMatriks {
         // M.printToScreen(A, baris, kolom);
 
         // RegresiLinierBerganda.regresiLinierBerganda();
+        // RegresiLinierBerganda rlb = new RegresiLinierBerganda();
+        // rlb.hasilRegresi(A, y);
 
         // sc.close();
     }
