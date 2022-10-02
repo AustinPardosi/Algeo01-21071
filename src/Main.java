@@ -194,6 +194,9 @@ public class Main {
                                 // SPLCramer
                                 res = SPL.SPLCramer(matr, baris, kolom);
                                 m = new double[res.length][1];
+                                for (int i = 0; i < res.length; i++) {
+                                    m[i][0] = Math.round(res[i] * 1000.0) / 1000.0;
+                                }
 
                                 IO.writeFile("test/writeFileTesting.txt", m);
                                 break;
