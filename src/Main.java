@@ -166,6 +166,7 @@ public class Main {
                                 // detGauss
                                 m = new double[1][1];
                                 m[0][0] = determinan.detGauss(matr, baris, kolom);
+                                m[0][0] = Math.round(m[0][0] * 1000.0) / 1000.0;
 
                                 System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
 
@@ -175,6 +176,7 @@ public class Main {
                                 // detKofaktor
                                 m = new double[1][1];
                                 m[0][0] = determinan.detKofak(matr, baris, kolom);
+                                m[0][0] = Math.round(m[0][0] * 1000.0) / 1000.0;
 
                                 System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
 
@@ -336,10 +338,10 @@ public class Main {
 
                 // Keluar nilainya YEY
                 System.out.println("Nilai hasil interpolasi adalah");
-                System.out.printf("%.2f\n", hasil2[0][0]);
+                System.out.printf("%.3f\n", hasil2[0][0]);
 
                 m = new double[1][1];
-                m[0][0] = hasil2[0][0];
+                m[0][0] = Math.round(hasil2[0][0] * 1000.0) / 1000.0;
 
                 IO.writeFile("test/writeFileTesting.txt", m);
 

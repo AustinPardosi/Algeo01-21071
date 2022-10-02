@@ -73,8 +73,11 @@ public class SPL {
 
             // output hasil
             for (int i = 0; i < row; i++) {
-                System.out.printf("x%d = %.2f \n", i + 1, hasil[i][0]);
+                System.out.printf("x%d = %.3f \n", i + 1, hasil[i][0]);
             }
+        }
+        for (int i = 0; i < row; i++) {
+            hasil[i][0] = Math.round(hasil[i][0] * 1000.0) / 1000.0;
         }
         return hasil;
     }
