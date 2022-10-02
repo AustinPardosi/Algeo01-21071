@@ -429,8 +429,12 @@ public class Main {
                 double[] hasil = regresi.hasilRegresi(matriks, y);
 
                 // Output persamaan regresi linier berganda
+                text = new String[2][1];
+                text[0][0] = "y = " + (Math.round(hasil[0] * 1000.0) / 1000.0);
                 System.out.printf("Persamaan hasil regresi linier berganda adalah y = %.3f", hasil[0]);
+
                 for (int i = 1; i < hasil.length; i++) {
+                    text[0][0] += " + " + (Math.round(hasil[i] * 1000.0) / 1000.0) + " x" + i;
                     System.out.printf(" + %.3f x%d", hasil[i], i);
                 }
 
@@ -448,9 +452,9 @@ public class Main {
                 }
                 System.out.printf("Nilai taksirannya adalah %.03f\n", result);
 
-                // buat output ke file (belum selesai)
-                // text = ...;
-                // IO.writeFileString("test/writeFileTesting.txt", text);
+                // output ke file
+                text[1][0] = "" + (Math.round(result * 1000.0) / 1000.0);
+                IO.writeFileString("test/writeFileTesting.txt", text);
             }
             System.out.println("");
             System.out.println("------------------------------------------------------------------------");
