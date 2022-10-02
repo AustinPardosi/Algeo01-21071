@@ -174,24 +174,15 @@ public class SPL {
         GaussJordan gj = new GaussJordan();
         gj.gaussJordan(matr, baris, kolom);
         double[] Hasil = new double[baris];
-        int row, col;
         if(gj.isNoSolution(matr, baris, kolom)) {
             System.out.println("SPL Tidak Memiliki Solusi");
         } else {
-            double[][] cut = gj.createMatEff(matr);
-            row = cut.length;
-            try {
-                col = cut[0].length;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                col = 0;
-            }
-
-            if(row == (col-1)) {
-                for(int i=0; i<row; i++) {
-                    Hasil[i] = cut[i][col-1];
+            if(baris == (kolom-1)) {
+                for(int i=0; i<baris; i++) {
+                    Hasil[i] = matr[i][kolom-1];
                     System.out.printf("x%d = %.2f \n", i + 1, Hasil[i]);
                 }
-            } else if (row < (col-1)) {
+            } else if (baris < (kolom-1)) {
                 System.out.println("Solusi banyak (parametrik)");
             } else {
                 System.out.println("Tidak Memiliki Solusi");
