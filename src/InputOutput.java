@@ -21,7 +21,7 @@ class InputOutput {
 
         for (i = 0; i < M; i++) {
             for (j = 0; j < N; j++) {
-                System.out.printf("%.2f ", matr[i][j]);
+                System.out.printf("%.3f ", matr[i][j]);
             }
             System.out.println();
         }
@@ -85,8 +85,7 @@ class InputOutput {
         return rowCol;
     }
 
-    // Write dari file
-    // Belum di tes
+    // Write ke file
     boolean writeFile(String path, double[][] matrix) {
         try {
             FileWriter myWriter = new FileWriter(path);
