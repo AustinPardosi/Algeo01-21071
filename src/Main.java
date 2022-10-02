@@ -428,11 +428,7 @@ public class Main {
                 // Output persamaan regresi linier berganda
                 System.out.printf("Persamaan hasil regresi linier berganda adalah y = %.3f", hasil[0]);
                 for (int i = 1; i < hasil.length; i++) {
-                    if (hasil[i] > 0) {
-                        System.out.printf(" + %.3f x%d", hasil[i], i);
-                    } else {
-                        System.out.printf(" %.3f x%d", hasil[i], i);
-                    }
+                    System.out.printf(" + %.3f x%d", hasil[i], i);
                 }
 
                 // Sisa taksiran
