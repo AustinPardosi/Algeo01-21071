@@ -119,42 +119,46 @@ public class RegresiLinierBerganda {
         InputOutput io = new InputOutput();
         System.out.println("\nDengan Normal Estimation Equation, diperoleh matrix SPL sebagai berikut");
         io.printToScreen(SPL, kolom + 1, kolom + 2);
+        System.out.println("");
 
-        // Nilai X'X saja
-        double[][] xX = new double[kolom + 1][kolom + 1];
-        for (int i = 0; i <= kolom; i++) {
-            for (int j = 0; j <= kolom; j++) {
-                xX[i][j] = SPL[i][j];
-            }
-        }
+        Gauss ga = new Gauss();
+        ga.gauss(SPL, kolom + 1, kolom + 2);
+
+        // // Nilai X'X saja
+        // double[][] xX = new double[kolom + 1][kolom + 1];
+        // for (int i = 0; i <= kolom; i++) {
+        //     for (int j = 0; j <= kolom; j++) {
+        //         xX[i][j] = SPL[i][j];
+        //     }
+        // }
         // System.out.println("\nMatriks dari X'x : ");
         // io.printToScreen(xX, kolom+1, kolom+1);
 
         // Nilai Y saja
-        double[][] x = new double[kolom + 1][kolom + 1];
+        double[] x = new double[kolom + 1];
         for (int i = 0; i <= kolom; i++) {
-            for (int j = 0; j < kolom + 1; j++) {
-                x[i][j] = SPL[i][kolom + 1];
-            }
+                x[i] = SPL[i][kolom + 1];
+
         }
 
-        // Nilai invers X'X
-        Invers iv = new Invers();
-        double[][] hasilInvers = new double[kolom + 1][kolom + 1];
-        System.out.println("\n(X'x)^-1 : ");
-        hasilInvers = iv.inverseAdjoint(xX, kolom + 1, kolom + 1);
-        System.out.println();
+        // // Nilai invers X'X
+        // Invers iv = new Invers();
+        // double[][] hasilInvers = new double[kolom + 1][kolom + 1];
+        // System.out.println("\n(X'x)^-1 : ");
+        // hasilInvers = iv.inverseAdjoint(xX, kolom + 1, kolom + 1);
+        // System.out.println();
 
-        double[] temp = new double[kolom + 1];
-        // Kalikan matrix X'X dan Y
-        for (int i = 0; i < kolom + 1; i++) {
-            temp[i] = 0;
-            for (int j = 0; j < kolom + 1; j++) {
-                temp[i] += hasilInvers[i][j] * x[j][i];
-            }
-        }
+        // double[] temp = new double[kolom + 1];
+        // // Kalikan matrix X'X dan Y
+        // for (int i = 0; i < kolom + 1; i++) {
+        //     temp[i] = 0;
+        //     for (int j = 0; j < kolom + 1; j++) {
+        //         temp[i] += hasilInvers[i][j] * x[j][i];
+        //     }
+        // }
 
-        return temp;
+        // return temp;
+        return x;
 
     }
     // Akhirnya selesai
