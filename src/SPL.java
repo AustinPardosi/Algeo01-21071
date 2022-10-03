@@ -15,7 +15,7 @@ public class SPL {
     // - row (jumlah baris)
     // - col (jumlah kolom, yaitu row + 1 karena ketambahan b)
     // prekondisi : masukannya matriks augmented [A | b] untuk persamaan Ax = b
-    double[][] SPLInvers(double[][] matr, int row, int col) {
+    String[][] SPLInvers(double[][] matr, int row, int col) {
 
         // jadi idenya kita mau pisah dulu matriks augmentednya jadi A sama b
         // matriks a disimpen di variabel invers (karena nantinya bakal diinvers)
@@ -25,13 +25,14 @@ public class SPL {
         double[][] temp = new double[row][row]; // copy an invers
         double[][] b = new double[row][1]; // inisialisasi matriks b
         double[][] hasil = new double[row][1]; // inisialisasi matriks hasil
+        String[][] hasilString = new String[row][1]; // inisialisasi matriks hasil
 
         if (row != col - 1) {
             for (int i = 0; i < row; i++) {
                 hasil[i][0] = 0;
             }
             System.out.println("SPL tidak bisa diselesaikan dengan metode invers");
-            return hasil;
+            return hasilString;
         }
 
         // copy elemen matr (yang bagian A saja) ke invers dan temp
@@ -79,11 +80,16 @@ public class SPL {
         for (int i = 0; i < row; i++) {
             hasil[i][0] = Math.round(hasil[i][0] * 1000.0) / 1000.0;
         }
-        return hasil;
+
+        for (int j = 0; j < row; j++) {
+            hasilString[j][0] = Double.toString(hasil[j][0]);
+        }
+
+        return hasilString;
     }
 
     // 2. SPL Gauss
-    public double[] SPLGauss(double[][] matr, int baris, int kolom) {
+    public String[] SPLGauss(double[][] matr, int baris, int kolom) {
         // Lagi2 pake algo yang mirip gauss, cuma kita ketambahan 1 kolom lagi
         int i = 0;
         ge.pindahBarisNol(matr, baris, kolom);
@@ -123,6 +129,7 @@ public class SPL {
 
         // Nah ini yang susah, substitusi balik buat nentuin solusi
         double[] hasil = new double[baris]; // Inisiasi list hasil
+        String[] hasilString = new String[baris]; // Inisiasi list hasil
         if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
             System.out.println("SPL Tidak memiliki solusi");
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
@@ -169,11 +176,16 @@ public class SPL {
                 System.out.printf("x%d = %.3f \n", m + 1, hasil[m]);
             }
         }
-        return hasil;
+
+        for (int j = 0; j < baris; j++) {
+            hasilString[j] = Double.toString(hasil[j]);
+        }
+
+        return hasilString;
     }
 
     // 3. SPL Gauss Jordan
-    public double[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
+    public String[] SPLGaussJordan(double[][] matr, int baris, int kolom) {
         Gauss ge = new Gauss();
         GaussJordan gj = new GaussJordan();
         // manggil gauss dulu sebelum dilanjutin gauss jordan sampe eselon tereduksi
@@ -237,6 +249,7 @@ public class SPL {
 
         // Nah ini yang susah, substitusi balik buat nentuin solusi
         double[] hasil = new double[baris]; // Inisiasi list hasil
+        String[] hasilString = new String[baris]; // Inisiasi list hasil
         if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
             System.out.println("SPL Tidak memiliki solusi");
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
@@ -254,12 +267,18 @@ public class SPL {
                 System.out.printf("x%d = %.3f \n", m + 1, hasil[m]);
             }
         }
-        return hasil;
+
+        for (int j = 0; j < baris; j++) {
+            hasilString[j] = Double.toString(hasil[j]);
+        }
+
+        return hasilString;
     }
 
     // 4. SPL Cramer
-    public double[] SPLCramer(double[][] matr, int baris, int kolom) {
+    public String[] SPLCramer(double[][] matr, int baris, int kolom) {
         double[] hasil = new double[baris];
+        String[] hasilString = new String[baris];
         if (baris != kolom - 1) {
             for (int i = 0; i < baris; i++) {
                 hasil[i] = 0;
@@ -291,9 +310,11 @@ public class SPL {
 
                 // cari nilai x
                 // hitung nilai x pada masing2 matriks test
-                if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) != 0) {
-                    double x = det.detKofak(test, baris, kolom - 1)
-                            / det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length);
+                if (Double
+                        .parseDouble(det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length)) != 0) {
+                    double x = Double.parseDouble(det.detKofak(test, baris, kolom - 1))
+                            / Double.parseDouble(
+                                    det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length));
                     hasil[k] = x;
                 } else {
                     hasil[k] = -999;
@@ -304,9 +325,12 @@ public class SPL {
                 }
             }
 
-            if (ge.barisAneh(matriksPersegi, matriksPersegi.length, matriksPersegi.length-1)) { // Kalo baris terakhirnya baris aneh
+            if (ge.barisAneh(matriksPersegi, matriksPersegi.length, matriksPersegi.length - 1)) { // Kalo baris
+                                                                                                  // terakhirnya baris
+                                                                                                  // aneh
                 System.out.println("SPL Tidak memiliki solusi");
-            } else if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) == 0) {
+            } else if (Double
+                    .parseDouble(det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length)) == 0) {
                 System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");
             } else {
                 for (int k = 0; k < (kolom - 1); k++) {
@@ -314,7 +338,12 @@ public class SPL {
                 }
             }
         }
-        return hasil;
+
+        for (int j = 0; j < baris; j++) {
+            hasilString[j] = Double.toString(hasil[j]);
+        }
+
+        return hasilString;
     }
 
     // Membuat matriks persegi dari suatu matriks augmented

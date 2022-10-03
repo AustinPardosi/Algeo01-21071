@@ -21,8 +21,8 @@ public class Main {
     static Bicubic bicubic = new Bicubic();
     static RegresiLinierBerganda regresi = new RegresiLinierBerganda();
 
-    static double[] res;
-    static double[][] m;
+    static String[] res;
+    static String[][] m;
     static String[][] text;
 
     public static void main(String[] args) {
@@ -160,11 +160,10 @@ public class Main {
                                 // SPLGauss
                                 // Handle kasus jumlah baris < kolom-1
                                 int selisih;
-                                if (baris < kolom-1) {
+                                if (baris < kolom - 1) {
                                     selisih = (kolom - 1) - baris;
                                     baris += selisih;
-                                }
-                                else {
+                                } else {
                                     selisih = 0;
                                 }
                                 // Define matriks baru
@@ -176,31 +175,30 @@ public class Main {
                                     }
                                 }
                                 // refill sisa elemen
-                                for (int z = 0; z < baris-selisih; z++) {
+                                for (int z = 0; z < baris - selisih; z++) {
                                     for (int y = 0; y < kolom; y++) {
                                         matriks[z][y] = matr[z][y];
                                     }
                                 }
 
                                 res = SPL.SPLGauss(matriks, baris, kolom);
-                                m = new double[res.length][1];
+                                m = new String[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Math.round(res[i] * 1000) / 1000;
+                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
                                 }
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 System.out.println("~ Sistem Persamaan Linier dengan Metode Eliminasi Gauss-Jordan ~");
                                 // SPLGaussJordan
                                 // Handle kasus jumlah baris < kolom-1
                                 int beda;
-                                if (baris < kolom-1) {
+                                if (baris < kolom - 1) {
                                     beda = (kolom - 1) - baris;
                                     baris += beda;
-                                }
-                                else {
+                                } else {
                                     beda = 0;
                                 }
                                 // Define matriks baru
@@ -212,38 +210,38 @@ public class Main {
                                     }
                                 }
                                 // refill sisa elemen
-                                for (int z = 0; z < baris-beda; z++) {
+                                for (int z = 0; z < baris - beda; z++) {
                                     for (int y = 0; y < kolom; y++) {
                                         matrix[z][y] = matr[z][y];
                                     }
                                 }
 
                                 res = SPL.SPLGaussJordan(matrix, baris, kolom);
-                                m = new double[res.length][1];
+                                m = new String[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Math.round(res[i] * 1000) / 1000;
+                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
                                 }
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                             case 'c':
                                 System.out.println("~ Sistem Persamaan Linier dengan Metode Matriks Balikan ~");
                                 // SPLInvers
                                 m = SPL.SPLInvers(matr, baris, kolom);
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                             case 'd':
                                 System.out.println("~ Sistem Persamaan Linier dengan Kaidah Cramer ~");
                                 // SPLCramer
                                 res = SPL.SPLCramer(matr, baris, kolom);
-                                m = new double[res.length][1];
+                                m = new String[res.length][1];
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Math.round(res[i] * 1000.0) / 1000.0;
+                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000.0) / 1000.0);
                                 }
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;
@@ -252,24 +250,24 @@ public class Main {
                             case 'a':
                                 System.out.println("~ Determinan dengan Metode Eliminasi Gauss ~");
                                 // detGauss
-                                m = new double[1][1];
+                                m = new String[1][1];
                                 m[0][0] = determinan.detGauss(matr, baris, kolom);
-                                m[0][0] = Math.round(m[0][0] * 1000.0) / 1000.0;
+                                m[0][0] = Double.toString(Math.round(Double.parseDouble(m[0][0]) * 1000.0) / 1000.0);
 
                                 System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 System.out.println("~ Determinan dengan Metode Kofaktor ~");
                                 // detKofaktor
-                                m = new double[1][1];
+                                m = new String[1][1];
                                 m[0][0] = determinan.detKofak(matr, baris, kolom);
-                                m[0][0] = Math.round(m[0][0] * 1000.0) / 1000.0;
+                                m[0][0] = Double.toString(Math.round(Double.parseDouble(m[0][0]) * 1000.0) / 1000.0);
 
                                 System.out.printf("Nilai determinan: %.03f\n", m[0][0]);
 
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;
@@ -278,21 +276,29 @@ public class Main {
                             case 'a':
                                 System.out.println("~ Matriks Balikan dengan Metode Eliminasi Gauss-Jordan ~");
                                 // inversGaussJordan
-                                m = new double[baris][baris];
+                                m = new String[baris][baris];
+                                double[][] outp = new double[baris][baris];
 
                                 System.out.println("Matriks balikan:");
                                 m = invers.inversGaussJordan(matr, baris);
-                                IO.printToScreen(m, baris, baris);
-                                IO.writeFile("test/writeFileTesting.txt", m);
+
+                                for (int i = 0; i < baris; i++) {
+                                    for (int j = 0; j < baris; j++) {
+                                        outp[i][j] = Double.parseDouble(m[i][j]);
+                                    }
+                                }
+
+                                IO.printToScreen(outp, baris, baris);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                             case 'b':
                                 System.out.println("~ Matriks Balikan dengan Metode Adjoint ~");
                                 // inversAdjoint
-                                m = new double[baris][baris];
+                                m = new String[baris][baris];
 
                                 System.out.println("Matriks balikan:");
                                 m = invers.inverseAdjoint(matr, baris, kolom);
-                                IO.writeFile("test/writeFileTesting.txt", m);
+                                IO.writeFileString("test/writeFileTesting.txt", m);
                                 break;
                         }
                         break;
@@ -430,10 +436,10 @@ public class Main {
                 System.out.println("Nilai hasil interpolasi adalah");
                 System.out.printf("%.3f\n", hasil2[0][0]);
 
-                m = new double[1][1];
-                m[0][0] = Math.round(hasil2[0][0] * 1000.0) / 1000.0;
+                m = new String[1][1];
+                m[0][0] = Double.toString(Math.round(hasil2[0][0] * 1000.0) / 1000.0);
 
-                IO.writeFile("test/writeFileTesting.txt", m);
+                IO.writeFileString("test/writeFileTesting.txt", m);
 
             } else if (menu == 6) {
                 double[][] matriks;

@@ -42,7 +42,13 @@ public class RegresiLinierBerganda {
 
         SPL ga = new SPL();
         System.out.println("Hasilnya (variabel beta) adalah : ");
-        double[] result = ga.SPLGauss(solusi, kolom + 1, kolom + 2);
+        String[] resultString = ga.SPLGauss(solusi, kolom + 1, kolom + 2);
+        double[] result = new double[resultString.length];
+
+        for (int i = 0; i < resultString.length; i++) {
+            result[i] = Double.parseDouble(resultString[i]);
+        }
+
         System.out.println();
 
         // Nilai Y saja
