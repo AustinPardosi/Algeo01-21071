@@ -158,15 +158,7 @@ public class GaussJordan {
                 }
             }
         }
-    }
 
-    boolean isNoSolution(double[][] matr, int baris, int kolom) {
-        for (int i = 0; i < baris; i++) {
-            if (ge.barisAneh(matr, kolom, i)) {
-                return true;
-            }
-        }
-        return false;
+        // isNoSolution dihapus karena tidak digunakan
     }
-
 }
