@@ -158,7 +158,31 @@ public class Main {
                             case 'a':
                                 System.out.println("~ Sistem Persamaan Linier dengan Metode Eliminasi Gauss ~");
                                 // SPLGauss
-                                res = SPL.SPLGauss(matr, baris, kolom);
+                                // Handle kasus jumlah baris < kolom-1
+                                int selisih;
+                                if (baris < kolom-1) {
+                                    selisih = (kolom - 1) - baris;
+                                    baris += selisih;
+                                }
+                                else {
+                                    selisih = 0;
+                                }
+                                // Define matriks baru
+                                double[][] matriks = new double[baris][kolom];
+                                // bikin semua elemen matriks 0
+                                for (int p = 0; p < baris; p++) {
+                                    for (int q = 0; q < kolom; q++) {
+                                        matriks[p][q] = 0;
+                                    }
+                                }
+                                // refill sisa elemen
+                                for (int z = 0; z < baris-selisih; z++) {
+                                    for (int y = 0; y < kolom; y++) {
+                                        matriks[z][y] = matr[z][y];
+                                    }
+                                }
+
+                                res = SPL.SPLGauss(matriks, baris, kolom);
                                 m = new double[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
@@ -170,7 +194,31 @@ public class Main {
                             case 'b':
                                 System.out.println("~ Sistem Persamaan Linier dengan Metode Eliminasi Gauss-Jordan ~");
                                 // SPLGaussJordan
-                                res = SPL.SPLGaussJordan(matr, baris, kolom);
+                                // Handle kasus jumlah baris < kolom-1
+                                int beda;
+                                if (baris < kolom-1) {
+                                    beda = (kolom - 1) - baris;
+                                    baris += beda;
+                                }
+                                else {
+                                    beda = 0;
+                                }
+                                // Define matriks baru
+                                double[][] matrix = new double[baris][kolom];
+                                // bikin semua elemen matriks 0
+                                for (int p = 0; p < baris; p++) {
+                                    for (int q = 0; q < kolom; q++) {
+                                        matrix[p][q] = 0;
+                                    }
+                                }
+                                // refill sisa elemen
+                                for (int z = 0; z < baris-beda; z++) {
+                                    for (int y = 0; y < kolom; y++) {
+                                        matrix[z][y] = matr[z][y];
+                                    }
+                                }
+
+                                res = SPL.SPLGaussJordan(matrix, baris, kolom);
                                 m = new double[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
