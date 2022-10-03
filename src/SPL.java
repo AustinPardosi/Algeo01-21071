@@ -308,10 +308,6 @@ public class SPL {
                     count += 1;
                 }
             }
-            // if (count == (kolom - 1)) {
-            // System.out.println("Matriks tidak persegi");
-            // return hasil;
-            // }
 
             if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) == 0) {
                 System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");

@@ -56,9 +56,6 @@ public class Main {
 
         boolean isContinue = true;
 
-        // System.out.println("PILIHAN MENU");
-        // System.out.println(listMenu);
-
         Scanner sc = new Scanner(System.in); // untuk input keyboard
 
         while (isContinue) {

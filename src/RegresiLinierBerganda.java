@@ -1,6 +1,3 @@
-// import java.io.IOException;
-// import java.util.Scanner;
-
 public class RegresiLinierBerganda {
     static InputOutput io = new InputOutput();
 
@@ -46,21 +43,16 @@ public class RegresiLinierBerganda {
 
         SPL ga = new SPL();
         System.out.println("Hasilnya (var beta) adalah : ");
-        double[] result = ga.SPLGauss(solusi, kolom+1, kolom+2);
+        double[] result = ga.SPLGauss(solusi, kolom + 1, kolom + 2);
         System.out.println();
 
-
         // Nilai Y saja
-        double[] x = new double[kolom+1];
-        for (int i = 0; i < (kolom+1); i++) {
-                x[i] = result[i];
+        double[] x = new double[kolom + 1];
+        for (int i = 0; i < (kolom + 1); i++) {
+            x[i] = result[i];
         }
-
 
         return x;
 
     }
-    // Akhirnya selesai
-    // yuhuuuu
-
 }
