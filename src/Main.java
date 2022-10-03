@@ -72,7 +72,7 @@ public class Main {
             System.out.println();
 
             if (menu == 7) {
-                System.out.println("Terima kasih telah menggunakan kalkulator matriks kami.");
+                System.out.println("Terima kasih telah menggunakan kalkulator matriks kami :D");
                 break;
             }
 
