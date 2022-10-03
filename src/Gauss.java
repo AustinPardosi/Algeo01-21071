@@ -114,7 +114,4 @@ public class Gauss {
             }
         }
     }
-
-    // 10. The hardest one, print parametric
-    
 }

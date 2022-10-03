@@ -170,8 +170,3 @@ public class GaussJordan {
     }
 
 }
-// sekali lagi, kalo ga ngerti tanya aku aja ya
-// rada bingung kalo jelasin pake ketikan gini
-// aku jelasin kalo ketemu aja wkwkw
-// - oliv
-
