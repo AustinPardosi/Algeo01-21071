@@ -259,7 +259,6 @@ public class SPL {
 
     // 4. SPL Cramer
     public double[] SPLCramer(double[][] matr, int baris, int kolom) {
-
         double[] hasil = new double[baris];
         if (baris != kolom - 1) {
             for (int i = 0; i < baris; i++) {
@@ -270,8 +269,6 @@ public class SPL {
             // idenya buat Ax = b; dimana A = cramer, B= jawaban
             double[][] matriksPersegi = MatriksPersegi(matr); // bagian A
             double[][] jawaban = new double[baris][1]; // bagian b
-
-            int count = 0;
 
             // copy elemen matr (kolom terakhir) ke jawaban
             for (int i = 0; i < baris; i++) {
@@ -291,6 +288,7 @@ public class SPL {
                         }
                     }
                 }
+
                 // cari nilai x
                 // hitung nilai x pada masing2 matriks test
                 if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) != 0) {
@@ -304,16 +302,11 @@ public class SPL {
                 if (hasil[k] == -0) {
                     hasil[k] = 0;
                 }
-                if (hasil[k] == 0) {
-                    count += 1;
-                }
             }
-            // if (count == (kolom - 1)) {
-            // System.out.println("Matriks tidak persegi");
-            // return hasil;
-            // }
 
-            if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) == 0) {
+            if (ge.barisAneh(matriksPersegi, matriksPersegi.length, matriksPersegi.length-1)) { // Kalo baris terakhirnya baris aneh
+                System.out.println("SPL Tidak memiliki solusi");
+            } else if (det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length) == 0) {
                 System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");
             } else {
                 for (int k = 0; k < (kolom - 1); k++) {
