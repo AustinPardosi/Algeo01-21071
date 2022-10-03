@@ -5,6 +5,7 @@ public class SPL {
     GaussJordan gj = new GaussJordan();
     static Determinan det = new Determinan();
     InputOutput io = new InputOutput();
+    Parametric para = new Parametric();
 
     // [ function SPLInvers ]
     // Desc :
@@ -31,7 +32,8 @@ public class SPL {
             for (int i = 0; i < row; i++) {
                 hasil[i][0] = 0;
             }
-            System.out.println("SPL tidak bisa diselesaikan dengan metode invers");
+            hasilString[0][0] = "SPL tidak bisa diselesaikan dengan metode invers";
+            System.out.println(hasilString[0][0]);
             return hasilString;
         }
 
@@ -60,7 +62,9 @@ public class SPL {
             }
         }
         if (count == row * row) {
-            System.out.println("SPL tidak bisa diselesaikan dengan metode invers");
+            hasilString[0][0] = "SPL tidak bisa diselesaikan dengan metode invers";
+            System.out.println(hasilString[0][0]);
+            return hasilString;
         } else {
             // perkalian matriks A^(-1) dan b (lebih jelasnya liat ppt pak Rin), intinya
             // Ax = b -> x = A^(-1) * b (nanti bisa dapet solusi SPLnya dari perkalian ini)
@@ -131,9 +135,12 @@ public class SPL {
         double[] hasil = new double[baris]; // Inisiasi list hasil
         String[] hasilString = new String[baris]; // Inisiasi list hasil
         if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
-            System.out.println("SPL Tidak memiliki solusi");
+            hasilString[0] = "SPL tidak memiliki solusi";
+            System.out.println(hasilString[0]);
+            return hasilString;
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
+            // hasilString = para.parametrik(matr, true);
             // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
             /*
              * Belom jadi, skip aj
@@ -251,7 +258,9 @@ public class SPL {
         double[] hasil = new double[baris]; // Inisiasi list hasil
         String[] hasilString = new String[baris]; // Inisiasi list hasil
         if (ge.barisAneh(matr, kolom, baris - 1)) { // Kalo baris terakhirnya baris aneh
-            System.out.println("SPL Tidak memiliki solusi");
+            hasilString[0] = "SPL tidak memiliki solusi";
+            System.out.println(hasilString[0]);
+            return hasilString;
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
             // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
@@ -283,7 +292,9 @@ public class SPL {
             for (int i = 0; i < baris; i++) {
                 hasil[i] = 0;
             }
-            System.out.println("Matriks tidak persegi");
+            hasilString[0] = "SPL tidak bisa diselesaikan dengan metode cramer karena matriks tidak persegi";
+            System.out.println(hasilString[0]);
+            return hasilString;
         } else {
             // idenya buat Ax = b; dimana A = cramer, B= jawaban
             double[][] matriksPersegi = MatriksPersegi(matr); // bagian A
@@ -328,10 +339,14 @@ public class SPL {
             if (ge.barisAneh(matriksPersegi, matriksPersegi.length, matriksPersegi.length - 1)) { // Kalo baris
                                                                                                   // terakhirnya baris
                                                                                                   // aneh
-                System.out.println("SPL Tidak memiliki solusi");
+                hasilString[0] = "SPL tidak memiliki solusi";
+                System.out.println(hasilString[0]);
+                return hasilString;
             } else if (Double
                     .parseDouble(det.detKofak(matriksPersegi, matriksPersegi.length, matriksPersegi.length)) == 0) {
-                System.out.println("Determinan = 0 sehingga matriks tidak memiliki solusi unik");
+                hasilString[0] = "Determinan = 0 sehingga matriks tidak memiliki solusi unik";
+                System.out.println(hasilString[0]);
+                return hasilString;
             } else {
                 for (int k = 0; k < (kolom - 1); k++) {
                     System.out.printf("x%d = %.3f \n", k + 1, hasil[k]);

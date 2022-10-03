@@ -185,7 +185,11 @@ public class Main {
                                 m = new String[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
+                                    try {
+                                        m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
+                                    } catch (Exception e) {
+
+                                    }
                                 }
 
                                 IO.writeFileString("test/writeFileTesting.txt", m);
@@ -220,7 +224,11 @@ public class Main {
                                 m = new String[res.length][1];
 
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
+                                    try {
+                                        m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
+                                    } catch (Exception e) {
+
+                                    }
                                 }
 
                                 IO.writeFileString("test/writeFileTesting.txt", m);
@@ -237,8 +245,13 @@ public class Main {
                                 // SPLCramer
                                 res = SPL.SPLCramer(matr, baris, kolom);
                                 m = new String[res.length][1];
+
                                 for (int i = 0; i < res.length; i++) {
-                                    m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000.0) / 1000.0);
+                                    try {
+                                        m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
+                                    } catch (Exception e) {
+
+                                    }
                                 }
 
                                 IO.writeFileString("test/writeFileTesting.txt", m);
