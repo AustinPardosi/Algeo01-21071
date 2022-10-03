@@ -1,8 +1,9 @@
 # Tubes1Algeo
 
-Tugas Besar 1 - IF2123 Aljabar Linear dan Geometri 2022
+**Tugas Besar 1 - IF2123 Aljabar Linear dan Geometri 2022**
 
 Kelompok 15 - 2B1
+
 Anggota :
 1. Margaretha Olivia Haryono (13521071)
 2. Austin Gabriel Pardosi (13521084)
@@ -14,4 +15,6 @@ Pada Tugas Besar kali ini, program yang kami buat dapat digunakan untuk :
 3. Menghitung Matriks balikan dengan metode eliminasi Gauss-Jordan dan metode matriks adjoint.
 4. Menyelesaikan permasalahan interpolasi polinom, interpolasi bicubic, dan regresi linear berganda.
 
-Program utama yang akan dirun berada pada ```Main.java ```
+Program utama yang akan dirun berada pada ```src/Main.java ```
+
+Testcase dalam bentuk file berada pada folder ```test``` dan hasil output ke file akan ditampilkan pada ```test/writeFileTesting.txt```
