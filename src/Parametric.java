@@ -41,7 +41,7 @@ public class Parametric {
             char var = 'a';
             for (int i = 0; i < count; i++) {
                 if (indeksArr[i] == idx) {
-                    var = (char) (((int) var) + i);
+                    var = ((char) (((int) var) + i));
                     return var;
                 }
             }
