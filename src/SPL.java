@@ -140,37 +140,8 @@ public class SPL {
             return hasilString;
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
-            // hasilString = para.parametrik(matr, true);
-            // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
-            /*
-             * Belom jadi, skip aj
-             * // Kamus Lokal
-             * boolean[] stat = new boolean[baris + 1];
-             * String[] ans = new String[baris + 1];
-             * // Algoritma
-             * 
-             * for (int k = 0; k < baris; k++) {
-             * stat[k] = false;
-             * }
-             * 
-             * int count = 0;
-             * for (char cha = 'a'; cha <= 'z'; cha++) {
-             * if (count < baris) {
-             * ans[count] = Character.toString(cha);
-             * count += 1;
-             * }
-             * }
-             * 
-             * // Proses looping dimulai dari baris paling bawah
-             * int ketemu = 0;
-             * for (int r = baris; r >= 0; r -= 1) {
-             * for (int j = 0; j < kolom - 1; j += 1) {
-             * if (matr[r][j] == 0 && matr[r][j+1] != 0) {
-             * ketemu = j; // Kalo gaada brarti dia normal
-             * }
-             * }
-             * }
-             */
+            hasilString = para.parametrik(matr, true);
+            return hasilString;
         } else {
             for (int m = baris - 1; m >= 0; m -= 1) {
                 hasil[m] = nilai[m];
@@ -263,6 +234,8 @@ public class SPL {
             return hasilString;
         } else if (ge.barisNol(matr, kolom, baris - 1)) { // Kalo baris terakhirnya 0 semua
             System.out.println("SPL memiliki banyak solusi");
+            hasilString = para.parametrik(matr, false);
+            return hasilString;
             // Harusnya pake parametrik tp lagi bingung jadi ntar dulu
         } else {
             for (int m = baris - 1; m >= 0; m -= 1) {

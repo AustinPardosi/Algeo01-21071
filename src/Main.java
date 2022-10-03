@@ -188,7 +188,7 @@ public class Main {
                                     try {
                                         m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
                                     } catch (Exception e) {
-
+                                        m[i][0] = res[i];
                                     }
                                 }
 
@@ -227,7 +227,7 @@ public class Main {
                                     try {
                                         m[i][0] = Double.toString(Math.round(Double.parseDouble(res[i]) * 1000) / 1000);
                                     } catch (Exception e) {
-
+                                        m[i][0] = res[i];
                                     }
                                 }
 
