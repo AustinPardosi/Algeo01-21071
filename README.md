@@ -1,8 +1,9 @@
 # Tubes1Algeo
 
-Tugas Besar 1 - IF2123 Aljabar Linear dan Geometri 2022
+**Tugas Besar 1 - IF2123 Aljabar Linear dan Geometri 2022**
 
 Kelompok 15 - 2B1
+
 Anggota :
 1. Margaretha Olivia Haryono (13521071)
 2. Austin Gabriel Pardosi (13521084)
