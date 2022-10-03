@@ -38,7 +38,6 @@ public class RegresiLinierBerganda {
         InputOutput io = new InputOutput();
         System.out.println("\nDengan Normal Estimation Equation, diperoleh matrix solusi sebagai berikut");
         io.printToScreen(solusi, kolom + 1, kolom + 2);
-        System.out.println(kolom);
         System.out.println("");
 
         SPL ga = new SPL();
