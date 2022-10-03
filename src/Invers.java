@@ -15,7 +15,10 @@ public class Invers {
     // - row (jumlah baris yang juga adalah jumlah kolom)
     // prekondisi : row dan col bernilai sama, jadi nilai row dapat
     // berperan di iterasi kolom
-    double[][] inversGaussJordan(double[][] matr, int row) {
+    String[][] inversGaussJordan(double[][] matr, int row) {
+
+        String[][] hasilString = new String[row][row];
+
         double[][] aug = new double[row][2 * row]; // inisialisasi matriks augmented [ A | I ]
         // copy elemen matr ke aug
         for (int i = 0; i < row; i++) {
@@ -42,7 +45,7 @@ public class Invers {
             if (aug[i][i] == 0) {
                 System.out.println("Matriks tidak memiliki balikan");
                 singular = true;
-                return matr;
+                return hasilString;
             }
 
             // ini intinya ngelakuin gauss jordan ke matriks aug nya
@@ -77,7 +80,14 @@ public class Invers {
                 }
             }
         }
-        return matr;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                hasilString[i][j] = Double.toString(matr[i][j]);
+            }
+        }
+
+        return hasilString;
     }
 
     // 2. Matriks Kofaktor
@@ -89,7 +99,8 @@ public class Invers {
         for (int i = 0; i < baris; i += 1) {
             for (int j = 0; j < kolom; j += 1) {
                 // Assign elemen hasil sesuai sama definisi kofaktor
-                hasil[i][j] = d.detGauss(k.hapusBarisKolom(matr, baris, kolom, i, j), baris - 1, kolom - 1)
+                hasil[i][j] = Double
+                        .parseDouble(d.detGauss(k.hapusBarisKolom(matr, baris, kolom, i, j), baris - 1, kolom - 1))
                         * Math.pow((-1), (i + j));
             }
         }
@@ -112,15 +123,16 @@ public class Invers {
     }
 
     // 2. Inverse by adjoint
-    double[][] inverseAdjoint(double[][] matr, int baris, int kolom) {
+    String[][] inverseAdjoint(double[][] matr, int baris, int kolom) {
         // Inisalisasi matriks adjoint dulu
         double[][] inverse = new double[baris][kolom];
+        String[][] inverseString = new String[baris][kolom];
 
         // Cek dulu, inget, kalo matriks determinannya 0, artinya gapunya invers
-        double determinan = d.detKofak(matr, baris, kolom);
+        double determinan = Double.parseDouble(d.detKofak(matr, baris, kolom));
         if (determinan == 0) {
             System.out.println("Matriks tidak memiliki invers.");
-            return matr; // kalo ga punya invers, return matriks awal
+            return inverseString; // kalo ga punya invers, return matriks awal
         } else {
             // Ya biasa bikin double loop
             for (int i = 0; i < baris; i += 1) {
@@ -131,6 +143,13 @@ public class Invers {
             }
             M.printToScreen(inverse, baris, kolom);
         }
-        return inverse;
+
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                inverseString[i][j] = Double.toString(inverse[i][j]);
+            }
+        }
+
+        return inverseString;
     }
 }

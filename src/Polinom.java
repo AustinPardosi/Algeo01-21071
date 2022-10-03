@@ -17,7 +17,12 @@ public class Polinom {
 
         // Penyelesaian dengan metode eliminasi Gauss
         SPL spl = new SPL();
-        double[] hasil = spl.SPLGauss(aug, n, n + 1);
+        String[] hasilString = spl.SPLGauss(aug, n, n + 1);
+        double[] hasil = new double[hasilString.length];
+
+        for (int i = 0; i < hasilString.length; i++) {
+            hasil[i] = Double.parseDouble(hasilString[i]);
+        }
 
         res[0][0] = "f(x) = ";
         System.out.print("f(x) = ");

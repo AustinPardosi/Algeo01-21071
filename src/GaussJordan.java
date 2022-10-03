@@ -42,6 +42,15 @@ public class GaussJordan {
 
     }
 
+    int leadingOneCol(double[][] matr, int col, int i) {
+        for (int j = 0; j < col; j++) {
+            if (matr[i][j] == 1) {
+                return j;
+            }
+        }
+        return -999;
+    }
+
     // [ procedure gaussJordan ]
     // Desc :
     // ngelakuin prosedur gauss jordan sih intinya hingga terbentuk
